@@ -27,7 +27,7 @@
 
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
 
 <link rel="stylesheet" href="/css/main.css"  >
 
@@ -153,17 +153,13 @@
         
         <div class="index-excerpt" >
           <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-
+Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
 More info: Writing
-Run server1$ hexo server
-
+Run server$ hexo server
 More info: Server
-Generate static files1$ hexo generate
-
+Generate static files$ hexo generate
 More info: Generating
-Deploy to remote sites1$ hexo deploy
-
+Deploy to remote sites$ hexo deploy
 More info: Deployment
 </div>
         </div>
@@ -174,6 +170,50 @@ More info: Deployment
           <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-11&nbsp;&nbsp;
         
         
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%8E%92%E5%BA%8F-1-%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(1) 桶排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">说起排序算法，我最先想到的就是桶排序了，《啊哈算法》上的第一个算法，当初学习时，顿感神奇！这种直接定位到下标的技术(哈希)在日后更是常见，用的好可以降低一个级别的时间复杂度。当时，我已了解到的排序算法如冒泡排序、插入排序、选择排序，快速排序等，都有一个明显比较大小的过程，但是桶排序没有，桶排序直接定位到它应该在哪里，然后…
+就没有然后了，一眼望去，排好了。后续接触，才发现《啊哈算法》上讲的桶排序其实是桶范围 = 1的特殊情况（称“计数排序”），其他情况还是需要比较的过程的，但是我还是把书上讲的当作真的桶排序，谁让我对它那么熟悉呢，哈哈。正文开始。
+问题描述给定一堆数字，排序
+桶排序过程：以下过程并非严格的“桶排序”，只是按照《啊哈算法》上的内容设计第一个数字 2， 放到坐标为 2 的桶上，第二个数 7，放到坐标为 7 的桶上，第三个数 1，放到坐标为 1 的桶上，...若干次 “放” 之后，接下来就是“一眼望去”，扫描一遍，即可得到结果：    0 1 2 2 2 3 4 4 4 5 6 7第一次看到这个排序，我就惊了！ 这么巧妙！原理很简单，就是根据数本身，放到下标为数本身的桶里，再</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/tags/%E5%93%88%E5%B8%8C">哈希</a>&nbsp;
+          
         
       </div>
     </div>
@@ -363,6 +403,32 @@ More info: Deployment
   </script>
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
 
 
 
