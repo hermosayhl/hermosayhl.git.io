@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>manajro-gnome 配置与美化 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 十一月 25日 2019, 10:22 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    1.9k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      8 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>操作系统 manjaro gnome（manjaro是 Arch Linux 的衍生版之一，最近几年很火，富有“世界第 ? linux”的美誉。<br>我曾经使用过 ubuntu16.04、manjaro KD，其中ubuntu16.04可以说是很人性化了(deepin更甚)，对新手很友好，网上资料很多；manjaro KDE可定制型十分强，滚动更新……emm，没法直接安装 gcc 5.4.0或者更低的版本，编译安装不过，但 manjaro KDE 界面十分漂日常工具亮，操作也相对复杂、专业。<br>这次尝试 manjaro gnome 主要是有一次更新 manjaro KDE挂掉了……<br>花费了一下午的时间，配置开发环境以及主题美化等，较为简单，效果如下：<br><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-33-24.jpg" srcset="/img/loading.gif" alt></p>
+<h1 id="相关文件"><a href="#相关文件" class="headerlink" title="相关文件"></a>相关文件</h1><p>每次重装 linux 都有一大堆命令，还是零零散散地，为了克服”怕麻烦“的心理，做一次较为简单、流畅的配置流程，相关文件放在 <a href="https://github.com/YHLelaine/files_used_in_manjaro" target="_blank" rel="noopener">github</a><br>下载：</p>
+<blockquote>
+<ol>
+<li>sudo pacman -S git<br>git clone <a href="https://github.com/YHLelaine/files_used_in_manjaro" target="_blank" rel="noopener">https://github.com/YHLelaine/files_used_in_manjaro</a></li>
+<li>直接从 github 下载，没有挂掉的风险</li>
+</ol>
+</blockquote>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-33-37.jpg" srcset="/img/loading.gif" alt></p>
+<h1 id="更新源"><a href="#更新源" class="headerlink" title="更新源"></a>更新源</h1><p>首先输入以下命令，选择一个耗时较短的源地址，点击 OK -&gt; 我想使用这个镜像源，最好选择 <a href="https://mirrors.ustc.edu.cn/manjaro/" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/manjaro/</a></p>
+<blockquote>
+<p>sudo pacman-mirrors -i -c China -m rank</p>
+</blockquote>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/11693809-973c3911c5165c3a.gif" srcset="/img/loading.gif" alt></p>
+<p>更新系统，速度会比原来快很多</p>
+<blockquote>
+<p>sudo pacman -Syy</p>
+</blockquote>
+<p>若想长久使用镜像源，还需要编辑配置文件 /etc/pacman.conf。原有的 gedit 编辑器启动太慢，卸载（可选可不选，我几乎没用过），安装 leafpad 即可，leafpad 是 linux 下十分轻巧的编辑器，启动很快。</p>
+<blockquote>
+<p>sudo pacman -R gedit<br>sudo pacman -S leafpad<br>sudo leafpad /etc/pacman.conf</p>
+</blockquote>
+<p>输入以下内容，保存</p>
+<pre><code>[archlinuxcn]
+SigLevel = Optional TrustedOnly
+Server = https://mirrors.ustc.edu.cn/archlinuxcn/$arch</code></pre><p>安装 archlinuxcn-keyring 包导入 GPG key </p>
+<blockquote>
+<p>sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</p>
+</blockquote>
+<p>完成之后，基本的包管理命令已经可以使用了</p>
+<blockquote>
+<p>安装软件 :   sudo pacman -S 软件名<br>卸载软件 :   sudo pacman -R 软件名<br>搜索软件 :   sudo pacman -Ss 软件名<br>…</p>
+</blockquote>
+<p>新的包管理工具：</p>
+<blockquote>
+<p>sudo pacman -S yaourt<br>sudo pacman -S yay<br>yay -S 软件名</p>
+</blockquote>
+<h1 id="安装中文输入法"><a href="#安装中文输入法" class="headerlink" title="安装中文输入法"></a>安装中文输入法</h1><blockquote>
+<p>sudo pacman -S fcitx-rime fcitx-im fcitx-configtool</p>
+</blockquote>
+<p>修改配置文件</p>
+<blockquote>
+<p>sudo leafpad /images/日常工具/manajro-gnome配置与美化/.xprofile</p>
+</blockquote>
+<p>输入以下内容保存</p>
+<pre><code>export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=&quot;@im=fcitx&quot;</code></pre><p>重启生效</p>
+<blockquote>
+<p>reboot</p>
+</blockquote>
+<p>点击右上方小键盘 －＞　配置当前输入法　</p>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-34-43.jpg" srcset="/img/loading.gif" alt></p>
+<p>将搜狗输入法调至首位<br>检查，输入：</p>
+<blockquote>
+<p>sogou-qimpanel</p>
+</blockquote>
+<p>如果报错，提示缺少lib.qt.so，则安装 qt4 配件，重启生效</p>
+<blockquote>
+<p>sudo pacman -S fcitx-qt4<br>reboot</p>
+</blockquote>
+<h1 id="卸载一些不用的软件"><a href="#卸载一些不用的软件" class="headerlink" title="卸载一些不用的软件"></a>卸载一些不用的软件</h1><blockquote>
+<p>sudo pacman -R steam-manjaro gedit freeoffice<br>添加/删除软件 -&gt; 卸载火狐浏览器</p>
+</blockquote>
+<h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><h2 id="1-QQ"><a href="#1-QQ" class="headerlink" title="1. QQ"></a>1. QQ</h2><blockquote>
+<p>sudo pacman -S deepin.com.qq.im</p>
+</blockquote>
+<p>安装竟然一遍过…这和以往不同。wineQQ还是有点不太稳定，但是和官方新推出的QQ for linux 2.0版(2009老款)相比好太多。</p>
+<h2 id="2-微信"><a href="#2-微信" class="headerlink" title="2. 微信"></a>2. 微信</h2><p>先搜索，有两个版本，wine-wechat 和 electron-wechat，我以前用过 electron-wechat，还不错，这次继续用 electron-wechat</p>
+<blockquote>
+<p>sudo pacman -Ss wechat<br>sudo pacman -S electronic-wechat</p>
+</blockquote>
+<h2 id="3-WPS"><a href="#3-WPS" class="headerlink" title="3. WPS"></a>3. WPS</h2><p>自带的 libreoffice 和 freeoffice 都不太行…直接卸载；wps 在ubuntu上的体验还不错，但在windows上就有点卡了。</p>
+<blockquote>
+<p>sudo pacman -S wps-office ttf-wps-fonts</p>
+</blockquote>
+<p>打开 word，输入几个字符，发现….所有的字体都是一样的，连最常用的宋体都不正常，这是系统缺少字体的缘故，将Windows下的字体全部拷贝（路径：C-&gt;Windows-&gt;Fonts），以下解决措施参考<a href="https://blog.csdn.net/atpalain_csdn/article/details/50801639" target="_blank" rel="noopener">这里</a>。<br>之前从 <a href="https://github.com/YHLelaine/files_used_in_manjaro" target="_blank" rel="noopener">github</a> 下载的文件已经下载好了 <code>win_fonts</code> 文件夹，将文件夹拷贝至 /usr/share/fonts/目录下</p>
+<blockquote>
+<p>sudo cp -r win_fonts /usr/share/fonts/<br>sudo fc-cache -fv<br>fc-list :lang=zh-cn | sort<br>效果如下，说明 linux 安装字体成功</p>
+</blockquote>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-35-10.jpg" srcset="/img/loading.gif" alt><br>重新打开 word，可以任意切换字体，正常！</p>
+<h2 id="4-浏览器"><a href="#4-浏览器" class="headerlink" title="4. 浏览器"></a>4. 浏览器</h2><p>谷歌浏览器当然有，推荐 vivaldi 浏览器，同步功能十分强大，而且书签等功能设计十分友好，同样支持谷歌插件</p>
+<blockquote>
+<p>sudo pacman -S google-chrome vivaldi </p>
+</blockquote>
+<h3 id="浏览器插件"><a href="#浏览器插件" class="headerlink" title="浏览器插件"></a>浏览器插件</h3><p>首先，最重要的是下载　<code>Google Assitant</code>。之前从 github 下载的文件中已有一些 crx 文件，直接拖到浏览器界面即可安装，或者扩展-&gt;开发者模式-&gt;加载已解压的插件-&gt;使用<br>如果这个文件删除，浏览器的对应插件也会消失。</p>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/11693809-09ddc2a3db77db47.gif" srcset="/img/loading.gif" alt></p>
+<p>必备插件</p>
+<blockquote>
+<ol start="2">
+<li>setup…</li>
+<li>一键管理扩展</li>
+<li>OneTab</li>
+<li>Adguard 广告拦截</li>
+<li>octotree 浏览github目录必备</li>
+<li>Nighteye 夜间眼睛</li>
+</ol>
+</blockquote>
+<h2 id="5-C"><a href="#5-C" class="headerlink" title="5. C++"></a>5. C++</h2><p>输入命令 gcc –version 检查开发环境，如果提示 gcc 不是命令也不是提示，则安装 gcc 和 g++，以及调试器 gdb</p>
+<blockquote>
+<p>sudo pacman -S gcc<br>sudo pacman -S gdb<br>g++ –version</p>
+</blockquote>
+<h2 id="6-Python"><a href="#6-Python" class="headerlink" title="6. Python"></a>6. Python</h2><p>输入命令 python -V，一般默认 3.7，若没有版本，则安装 python</p>
+<blockquote>
+<p>sudo pacman -S python</p>
+</blockquote>
+<p>最新推出 python==3.8，但大多数第三方包还未适配，先等着吧。<br>###　配置清华镜像源</p>
+<blockquote>
+<p>sudo pip install pip -U<br>sudo pip config set global.index-url <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a></p>
+</blockquote>
+<p>接下来就可以欢快地安装常用包了！</p>
+<blockquote>
+<p>sudo pip3 install beautifulsoup4 Cython Django eli5 jieba jedi keras keras-vis lightgbm matplotlib nltk numpy scipy pandas pillow PyPDF2 PyQt5 qimage2ndarray requests scikit-learn scikit-image tensorflow tqdm urllib3 opencv-python opencv-contrib-python</p>
+</blockquote>
+<h2 id="7-Git"><a href="#7-Git" class="headerlink" title="7. Git"></a>7. Git</h2><blockquote>
+<p>sudo pacman -S git<br>git –version<br>git config –global user.email “邮箱”<br>git config –global user.name “github 用户名”</p>
+</blockquote>
+<h2 id="8-Sublime-Text3"><a href="#8-Sublime-Text3" class="headerlink" title="8. Sublime Text3"></a>8. Sublime Text3</h2><p>使用 sublime-text3 也有三年了，真是码代码神器，节约了大量的时间，也许没有 vscode 扩展性强，也没有 vim 那么炫酷，但是编辑器来说足够了。</p>
+<p>官方安装方式如下：</p>
+<blockquote>
+<p><code>curl -O https://download.sublimetext.com/sublimehq-pub.gpg &amp;&amp; sudo pacman-key --add sublimehq-pub.gpg &amp;&amp; sudo pacman-key --lsign-key 8A8F901A &amp;&amp; rm sublimehq-pub.gpg</code><br><code>echo -e &quot;\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64&quot; | sudo tee -a /etc/pacman.conf</code><br><code>sudo pacman -Syu sublime-text</code></p>
+</blockquote>
+<p>但其实，yay 就足够了</p>
+<blockquote>
+<p>yay -S sublime</p>
+</blockquote>
+<p>输入命令：<code>subl</code>　即可打开神器！<br>具体配置参考：<a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/sublime-text%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="sublime环境配置">sublime环境配置</a><br><a href="http://yhlelaine.farbox.com/post/ri-chang-gong-ju/sublime-text-huan-jing-pei-zhi-chi-xu-geng-xin" target="_blank" rel="noopener">开发环境 C++, Python, Java</a>　　<a href="https://sublime-text.readthedocs.io/en/latest/reference/build_systems.html" target="_blank" rel="noopener">如何写 sublime-build</a></p>
+<p>配套 sublime-merge　git　可视化工具</p>
+<blockquote>
+<p>yay -S sublime-merge</p>
+</blockquote>
+<p>如果安装失败，添加／删除文件－＞搜索 sublime-merge </p>
+<h2 id="9-Vscode"><a href="#9-Vscode" class="headerlink" title="9. Vscode"></a>9. Vscode</h2><blockquote>
+<p>sudo pacman -S visual-studio-code-bin </p>
+</blockquote>
+<p>首要扩展 -&gt; Settings Sync -&gt; 登录 github -&gt; 直接同步我的 gist id</p>
+<p>具体配置参考 <a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/Vscode%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" title="Vscode环境配置">Vscode环境配置</a></p>
+<h2 id="10-ANGRYsearch"><a href="#10-ANGRYsearch" class="headerlink" title="10. ANGRYsearch"></a>10. ANGRYsearch</h2><p>linux 下的 everything，搜索十分强大，原理不清楚，应该是基于索引和哈希。</p>
+<blockquote>
+<p>yay -S ANGRYsearch</p>
+</blockquote>
+<p>如果安装失败，则<code>添加/删除软件</code>搜索安装，点击软件图标：</p>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/11693809-f4dad06c406dea3f.gif" srcset="/img/loading.gif" alt></p>
+<h2 id="11-百度网盘"><a href="#11-百度网盘" class="headerlink" title="11. 百度网盘"></a>11. 百度网盘</h2><p>之前从 <a href="https://github.com/YHLelaine/files_used_in_manjaro" target="_blank" rel="noopener">github</a> 下载的目录中有安装包<br><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-39-35.jpg" srcset="/img/loading.gif" alt><br>直接双击安装即可，找到图标，点击，正常登陆：<br><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-39-47.jpg" srcset="/img/loading.gif" alt></p>
+<p>界面还是很简洁的，不限速 2MB/s，下载还是蛮快的。</p>
+<h2 id="12-starDict"><a href="#12-starDict" class="headerlink" title="12. starDict"></a>12. starDict</h2><p>linux 下最好的翻译软件！在 windows 下反而需要先粘贴到剪切板，失去了它的优势，安装软件和翻译库</p>
+<blockquote>
+<p>sudo pacman -S stardict<br>在<a href="http://download.huzheng.org/" target="_blank" rel="noopener">这个网站</a>下载词典，或者之前从　<a href="https://github.com/YHLelaine/files_used_in_manjaro" target="_blank" rel="noopener">github</a> 下载的文件中有：</p>
+</blockquote>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-40-12.jpg" srcset="/img/loading.gif" alt></p>
+<blockquote>
+<p>cd stardict<br>sudo cp -r * /usr/share/stardict/dic</p>
+</blockquote>
+<p>打开小巧强大的 stardict，可直接翻译<br><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/11693809-d9409e25af3fb9b2.gif" srcset="/img/loading.gif" alt></p>
+<h2 id="13-Okular"><a href="#13-Okular" class="headerlink" title="13. Okular"></a>13. Okular</h2><p>Okular 是 linux 下一款 pdf 阅读器</p>
+<blockquote>
+<p>sudo pacman -S okular</p>
+</blockquote>
+<h2 id="14-SSH-连接"><a href="#14-SSH-连接" class="headerlink" title="14. SSH 连接"></a>14. SSH 连接</h2><p>最新发现一个界面简洁、功能无比强大的　SHH 软件 <code>remmina</code></p>
+<blockquote>
+<p>sudo pacman -S remmina</p>
+</blockquote>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-40-42.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/12-40-52.jpg" srcset="/img/loading.gif" alt></p>
+<p>在这之前，一直以来用 putty，文件传输用 FileZilla</p>
+<blockquote>
+<p>sudo pacman -S openssh<br>sudo pacman -S putty<br>yay -S FileZilla</p>
+</blockquote>
+<p>如果 yay 安装 FileZilla 失败，则用<code>添加/删除软件</code>直接搜索安装 FIlezilla。<br>安装完成后，将云服务器的 ip 地址等配置到会话。</p>
+<blockquote>
+<p>后续发现 vscode 推出 remote SSH 等远端连接工具后，简直不能更方便！</p>
+</blockquote>
+<h2 id="15-Qt-designer"><a href="#15-Qt-designer" class="headerlink" title="15. Qt designer"></a>15. Qt designer</h2><p>添加/删除软件　－＞　Qt designer</p>
+<p>　</p>
+<h2 id="16-截图工具-Flameshot"><a href="#16-截图工具-Flameshot" class="headerlink" title="16. 截图工具 Flameshot"></a>16. 截图工具 Flameshot</h2><blockquote>
+<p>sudo pacman -S Flameshot</p>
+</blockquote>
+<h2 id="17-屏幕录制工具-peek"><a href="#17-屏幕录制工具-peek" class="headerlink" title="17. 屏幕录制工具 peek"></a>17. 屏幕录制工具 peek</h2><blockquote>
+<p>sudo pacman -S peek </p>
+</blockquote>
+<h1 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h1><p> 待续<br><a href="https://www.gnome-look.org/s/Gnome/browse/cat/134/order/latest/" target="_blank" rel="noopener">https://www.gnome-look.org/s/Gnome/browse/cat/134/order/latest/</a></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/linux">linux</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/manjaro">manjaro</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "manajro-gnome 配置与美化&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

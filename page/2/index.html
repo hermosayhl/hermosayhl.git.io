@@ -376,6 +376,299 @@ $dp[i - 1][j] + 1$，
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
         
         
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">动态规划</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92">动态规划</a>&nbsp;
+          
+            <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2">字符串</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/Vscode%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">Vscode 环境配置（持续更新）</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Vscode 相对于 sublime 来说，略显笨重，反应速度略慢（但是加上 tabNine 插件后补全直接飞起）。一款相当好的 Python “IDE”，C++ “IDE”……扩展性十分强，界面也可定制。今年5月发布的 Remote Development 插件，远程连接服务器，可以远程调试！！！感动！
+C++编译运行安装 C++ 环境，参考安装 C++
+
+扩展 -&gt; Coderunner -&gt; install 即可运行单文件，不仅局限于 C++，c，也可 Python等
+
+调试launch.json，修改 &quot;miDebuggerPath&quot;为自己的调试器的
+{
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        {
+            &quot;name&quot;: &quot;C/C++&quot;,
+            &quot;type&quot;: &quot;cppdbg&quot;,
+            </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8">编辑器</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/vscode">vscode</a>&nbsp;
+          
+            <a href="/tags/%E6%8F%92%E4%BB%B6">插件</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/sublime-text%E6%8F%92%E4%BB%B6%E6%8E%A8%E8%8D%90/">
+        <p class="h4 index-header">sublime-text 插件推荐（持续更新）</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">安装1. Windows
+便携版exe版
+
+2. Linux
+
+curl -O https://download.sublimetext.com/sublimehq-pub.gpg &amp;&amp; sudo pacman-key --add sublimehq-pub.gpg &amp;&amp; sudo pacman-key --lsign-key 8A8F901A &amp;&amp; rm sublimehq-pub.gpg
+echo -e &quot;\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64&quot; | sudo tee -a /etc/pacman.conf
+sudo pacman -Syu sublime-text
+
+
+输入命令：subl　即可打开神器！
+sublime 的插件安装有两种方式：
+
+
+可从官网下载，
+package-control，推荐使用
+
+
+插件推荐官方数据统计
+1. package-controlctrl + `，调出　subl</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8">编辑器</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8F%92%E4%BB%B6">插件</a>&nbsp;
+          
+            <a href="/tags/sublime">sublime</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/sublime-text%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/">
+        <p class="h4 index-header">sublime-text 环境配置(持续更新)</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">C++、C 环境配置Attention
+以下皆为单文件编译运行，多文件联合需要 makefile（后续更新）
+插件推荐
+
+1. Windows首先安装 C、C++ 编译器。较为自由的有以 GNU 为代表的 gcc 和 g++。windows 上没有 GNU，但是有 MinGW（全称 Minimalist GNU on Windows），是 GNU 在 windows 上的版本。安装途径：
+
+
+官网
+Dev C++ 默认使用 MinGW（打开所在路径-&gt;dev C++ 所在路径下有一个 MinGW64 的文件夹)
+
+
+然后配置环境变量( g++，gcc 编译命令需要根据一些路径，找到对应的程序对代码进行编译）
+
+此电脑 -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量 -&gt; 系统变量(S) -&gt; Path 双击 -&gt; 新建 -&gt; 找到对应 MinGW 的 gcc, g++路径，例如 D:\software\Dev-Cpp\MinGW64\bin，将这个路径填写 
+
+
+
+接下来再返回的过程中，每一个窗口都要点击确定 ！
+可能不会立马生效，需要重</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8">编辑器</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/sublime">sublime</a>&nbsp;
+          
+            <a href="/tags/C++">C++</a>&nbsp;
+          
+            <a href="/tags/Python">Python</a>&nbsp;
+          
+            <a href="/tags/Java">Java</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90/">
+        <p class="h4 index-header">软件推荐（持续更新）</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">windows(持续更新)编程
+sublime-text3  sublime-text环境配置
+编辑器，写代码利器，编码效率极高。掌握快捷键后可“起飞”，插件丰富。缺点是没有调试的接口
+
+
+
+
+vscode   Vscode环境配置
+微软出品，轻量级编辑器(400MB)，和sublime-text3类似。配置成功后，可调试，可扩展的插件丰富。
+
+
+
+
+Atom   
+原github出品，与前二者并肩的编辑器，界面很漂亮，个人体验没有 sublime-text3 流畅
+
+
+Vim、Emacs   
+传说中的两个神之编辑器，爱“折腾”
+
+
+Clion   
+JetBrain 全家桶之一，尽皆精品，功能十分完备，很不错的集成环境(1.2G)
+
+
+
+
+Qt creator
+不大的集成环境，调试方便，优势是直接与 Qt 结合；Qt 是桌面 UI 设计的优秀框架(C++)，桌面软件和图形化首选。其部件Qt Designer 可以与 Python 结合
+
+
+
+
+sublime-merge
+sublime-text3 配套的 git 可视化操作软件
+
+
+
+小工具
+Bandzip
+压缩、解压缩，不捆绑软</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E8%BD%AF%E4%BB%B6">软件</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E8%BD%AF%E4%BB%B6">软件</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/manajro-gnome%E9%85%8D%E7%BD%AE%E4%B8%8E%E7%BE%8E%E5%8C%96/">
+        <p class="h4 index-header">manajro-gnome 配置与美化</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">操作系统 manjaro gnome（manjaro是 Arch Linux 的衍生版之一，最近几年很火，富有“世界第 ? linux”的美誉。我曾经使用过 ubuntu16.04、manjaro KD，其中ubuntu16.04可以说是很人性化了(deepin更甚)，对新手很友好，网上资料很多；manjaro KDE可定制型十分强，滚动更新……emm，没法直接安装 gcc 5.4.0或者更低的版本，编译安装不过，但 manjaro KDE 界面十分漂日常工具亮，操作也相对复杂、专业。这次尝试 manjaro gnome 主要是有一次更新 manjaro KDE挂掉了……花费了一下午的时间，配置开发环境以及主题美化等，较为简单，效果如下：
+相关文件每次重装 linux 都有一大堆命令，还是零零散散地，为了克服”怕麻烦“的心理，做一次较为简单、流畅的配置流程，相关文件放在 github下载：
+
+
+sudo pacman -S gitgit clone https://github.com/YHLelaine/files_used_in_manjaro
+直接从 github 下载，没有挂掉</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/linux">linux</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/manjaro">manjaro</a>&nbsp;
+          
         
       </div>
     </div>

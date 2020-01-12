@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>Vscode 环境配置（持续更新） ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 十一月 25日 2019, 10:55 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    694 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      3 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>Vscode 相对于 sublime 来说，略显笨重，反应速度略慢（但是加上 tabNine 插件后补全直接飞起）。<br>一款相当好的 Python “IDE”，C++ “IDE”……扩展性十分强，界面也可定制。<br>今年5月发布的 Remote Development 插件，远程连接服务器，可以远程调试！！！感动！<br><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/Vscode%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-/11-22-09.jpg" srcset="/img/loading.gif" alt></p>
+<h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p><strong>编译运行</strong><br>安装 C++ 环境，参考<a href="https://www.jianshu.com/p/05a510f132c1" target="_blank" rel="noopener">安装 C++</a></p>
+<blockquote>
+<p>扩展 -&gt; Coderunner -&gt; install 即可运行单文件，不仅局限于 C++，c，也可 Python等</p>
+</blockquote>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p><strong>launch.json</strong>，修改 <code>&quot;miDebuggerPath&quot;</code>为自己的调试器的</p>
+<pre><code class="javascript">{
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        {
+            &quot;name&quot;: &quot;C/C++&quot;,
+            &quot;type&quot;: &quot;cppdbg&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;${fileDirname}/${fileBasenameNoExtension}.exe&quot;,
+            &quot;args&quot;: [&quot;-exec info registers&quot;],
+            &quot;stopAtEntry&quot;: false,
+            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
+            &quot;environment&quot;: [],
+            &quot;externalConsole&quot;: true,
+            &quot;MIMode&quot;: &quot;gdb&quot;,
+            &quot;miDebuggerPath&quot;: &quot;D:\\software\\C++\\MinGW\\bin\\gdb.exe&quot;,
+            &quot;preLaunchTask&quot;: &quot;g++&quot;,
+            &quot;setupCommands&quot;: [
+                {
+                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,
+                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,
+                    &quot;ignoreFailures&quot;: true
+                }
+            ],
+        },
+    ]
+}</code></pre>
+<p><strong>tasks.json</strong></p>
+<pre><code class="javascript">{
+    &quot;version&quot;: &quot;2.0.0&quot;,
+    &quot;command&quot;: &quot;g++&quot;,
+    &quot;args&quot;: [
+        &quot;-g&quot;,
+        &quot;${file}&quot;,
+        &quot;-o&quot;,
+        &quot;${fileDirname}/${fileBasenameNoExtension}.exe&quot;
+    ],
+    &quot;problemMatcher&quot;: {
+        &quot;owner&quot;: &quot;cpp&quot;,
+        &quot;fileLocation&quot;: [
+            &quot;relative&quot;,
+            &quot;${workspaceRoot}&quot;
+        ],
+        &quot;pattern&quot;: {
+            &quot;regexp&quot;: &quot;^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$&quot;,
+            &quot;file&quot;: 1,
+            &quot;line&quot;: 2,
+            &quot;column&quot;: 3,
+            &quot;severity&quot;: 4,
+            &quot;message&quot;: 5
+        }
+    },
+    &quot;group&quot;: {
+        &quot;kind&quot;: &quot;build&quot;,
+        &quot;isDefault&quot;: true
+    }
+}</code></pre>
+<p>设好断点，点击调试（文件路径中不要有中文！！！）<br><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/Vscode%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-/%E5%BD%95%E5%88%B6_2019_11_25_12_12_27_986.gif" srcset="/img/loading.gif" alt></p>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><blockquote>
+<p>扩展 -&gt; Python </p>
+</blockquote>
+<p>这个插件只是提供 Python 调试等功能的，解释运行 Python 脚本需要系统的python环境（不得不提一下，这个调试功能虽比不上 Pycharm 强大，但 vscode 轻量啊）</p>
+<h1 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a>插件推荐</h1><h2 id="1-aync-setting"><a href="#1-aync-setting" class="headerlink" title="1. aync-setting"></a>1. aync-setting</h2><blockquote>
+<p>插件与配置等多终端同步</p>
+</blockquote>
+<p>每次重装电脑，打开 vscode 第一步就是安装这个插件，然后…直接回到之前所有的 vscode 配置，哈哈。<br>具体配置过程参考<a href="https://www.jianshu.com/p/e27e2453d499" target="_blank" rel="noopener">这里</a></p>
+<h2 id="2-tabNine"><a href="#2-tabNine" class="headerlink" title="2. tabNine"></a>2. tabNine</h2><blockquote>
+<p>人工智能的自动补全，十分强大</p>
+</blockquote>
+<h2 id="3-Code-Runner"><a href="#3-Code-Runner" class="headerlink" title="3. Code Runner"></a>3. Code Runner</h2><blockquote>
+<p>能编译运行 C++、Java、Python 等多种语言。十分方便，前提是相应的开发环境已经安装好了</p>
+</blockquote>
+<h2 id="4-Remote-Development"><a href="#4-Remote-Development" class="headerlink" title="4. Remote Development"></a>4. Remote Development</h2><blockquote>
+<p>远端连接利器，terminal 和 filesystem 集成，在 vscode 调代码，在服务器的 1080ti 上跑代码</p>
+</blockquote>
+<h2 id="5-Bookmarks"><a href="#5-Bookmarks" class="headerlink" title="5. Bookmarks"></a>5. Bookmarks</h2><blockquote>
+<p>打标签，快速访问之前未做完的部分或需要注意的部分，对于代码量较多的程序来说很方便。</p>
+</blockquote>
+<h2 id="6-Material-Theme"><a href="#6-Material-Theme" class="headerlink" title="6.  Material Theme"></a>6.  Material Theme</h2><blockquote>
+<p>一款很漂亮的主题</p>
+</blockquote>
+<h2 id="7-Github-Plus-Theme"><a href="#7-Github-Plus-Theme" class="headerlink" title="7. Github Plus Theme"></a>7. Github Plus Theme</h2><blockquote>
+<p>类 github 主题</p>
+</blockquote>
+<h2 id="8-vscode-icons-mac"><a href="#8-vscode-icons-mac" class="headerlink" title="8. vscode-icons-mac"></a>8. vscode-icons-mac</h2><blockquote>
+<p>类 mac 的文件图标显示</p>
+</blockquote>
+<h2 id="9-Path-Autocomplete"><a href="#9-Path-Autocomplete" class="headerlink" title="9. Path Autocomplete"></a>9. Path Autocomplete</h2><blockquote>
+<p>路径自动填写，写较长的绝对路径时很方便</p>
+</blockquote>
+<h2 id="10-GitLens"><a href="#10-GitLens" class="headerlink" title="10. GitLens"></a>10. GitLens</h2><blockquote>
+<p>虽然 vscode 默认集成了 Git 部分，但是可视化程度不高，GitLens 可视化程度很高，信息很详尽</p>
+</blockquote>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8">编辑器</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/vscode">vscode</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%8F%92%E4%BB%B6">插件</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Vscode 环境配置（持续更新）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

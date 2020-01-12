@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>sublime-text 环境配置(持续更新) ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 十一月 25日 2019, 10:53 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    1.3k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      6 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="C-、C-环境配置"><a href="#C-、C-环境配置" class="headerlink" title="C++、C 环境配置"></a>C++、C 环境配置</h1><h4 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h4><ol>
+<li>以下皆为单文件编译运行，多文件联合需要 makefile（后续更新）</li>
+<li><a href="https://www.jianshu.com/p/5497d187be1c" target="_blank" rel="noopener">插件推荐</a></li>
+</ol>
+<h3 id="1-Windows"><a href="#1-Windows" class="headerlink" title="1. Windows"></a>1. Windows</h3><p>首先安装 C、C++ 编译器。较为自由的有以 GNU 为代表的 gcc 和 g++。windows 上没有 GNU，但是有 MinGW（全称 Minimalist GNU on Windows），是 GNU 在 windows 上的版本。安装途径：</p>
+<blockquote>
+<ol>
+<li><a href="http://mingw.org" target="_blank" rel="noopener">官网</a></li>
+<li>Dev C++ 默认使用 MinGW（打开所在路径-&gt;dev C++ 所在路径下有一个 MinGW64 的文件夹)</li>
+</ol>
+</blockquote>
+<p>然后配置环境变量( g++，gcc 编译命令需要根据一些路径，找到对应的程序对代码进行编译）</p>
+<blockquote>
+<p>此电脑 -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量 -&gt; 系统变量(S) -&gt; Path 双击 -&gt; 新建 -&gt; 找到对应 MinGW 的 gcc, g++路径，例如 <code>D:\software\Dev-Cpp\MinGW64\bin</code>，将这个路径填写 </p>
+</blockquote>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/sublime-text%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-/12-25-03.jpg" srcset="/img/loading.gif" alt></p>
+<blockquote>
+<p>接下来再返回的过程中，<strong><em>每一个窗口都要点击确定</em></strong> ！</p>
+<p>可能不会立马生效，需要重启 or 等若干分钟<br>打开命令行 cmd.exe，输入 <code>g++ --version</code>，如果有版本信息，说明环境配置成功。</p>
+</blockquote>
+<p> <img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/sublime-text%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-/12-25-14.jpg" srcset="/img/loading.gif" alt></p>
+<p>现在，给定一个 .c 文件或者 .cpp 文件，我们可以通过命令行编译代码文件了，命令：</p>
+<blockquote>
+<p>g++  test.c  -o test</p>
+</blockquote>
+<p>-o 输出到文件，输出文件是 text.exe，默认同目录。<br>注意一点， gcc, g++ 等编译器只是帮助我们编译了代码文件，并不能直接运行，集成环境(dev C++只是可以帮我们顺便运行输出文件而已)<br>运行，命令行输入：</p>
+<blockquote>
+<p>test.exe</p>
+</blockquote>
+<p>以上，已经确定完成了 C，C++ 环境的搭建，那么如何在 sublime-text3 中完成这整个过程呢？</p>
+<blockquote>
+<p>打开 sublime-text3 -&gt; Tools -&gt; build systems -&gt; New build systems…<br>需要填写一个 sublime-build 文件，如下书写：</p>
+</blockquote>
+<pre><code class="js">{
+    &quot;working_dir&quot;: &quot;$file_path&quot;,
+    &quot;cmd&quot;: &quot;g++ -Wall -std=c++14 -fexec-charset=GBK \&quot;$file_name\&quot; -o \&quot;$file_base_name\&quot;&quot;,
+    &quot;file_regex&quot;: &quot;^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$&quot;,
+    &quot;selector&quot;: &quot;source.c, source.cpp&quot;,
+
+    &quot;variants&quot;: 
+    [
+        {    
+            &quot;name&quot;: &quot;Run&quot;,
+            &quot;shell_cmd&quot;: &quot;g++ -Wall -std=c++14 -fexec-charset=GBK \&quot;$file\&quot; -o \&quot;$file_base_name\&quot; &amp;&amp; start cmd /c \&quot;\&quot;${file_path}/${file_base_name}\&quot; &amp; pause\&quot;&quot;
+        }
+    ]
+}</code></pre>
+<blockquote>
+<ol>
+<li>g++ 编译 C++，gcc 编译 C，可自行修改。C++兼容C，g++可以编译 c 和 C++；如果非要只编译 C，则将 g++ 改为 gcc，同时删除 -std=c++14</li>
+<li>编译参数：<ul>
+<li><strong><em>-Wall</em></strong>，开启警告提示</li>
+<li><strong><em>-std=c++14</em></strong>，按照 C++14 新标准</li>
+<li><strong><em>-fexec-charset=GBK</em></strong>，编码字符集 GBK；倘若编译运行失败，提示<code>error: no iconv implementation, cannot convert from UTF-8 to GBK</code>，则删除 <code>-fexec-charset=GBK</code>选项</li>
+<li><strong><em>-o</em></strong>，输出文件为</li>
+<li><strong><em>lmysqlclient</em></strong>，链接数据库</li>
+<li><strong><em>-lpthread</em></strong>，链接多线程库</li>
+<li><strong><em>-llog4cpp</em></strong>，链接log4cpp库</li>
+<li><strong><em>-lboost_system -lboost_thread -lboost_filesystem</em></strong>，链接 boost 库</li>
+</ul>
+<strong><em>……</em></strong></li>
+</ol>
+</blockquote>
+<p>假设命名为 C_myself.sublime-build，回到 Tools -&gt; build systems -&gt; 选择刚才命令的的  C_myself，最好别是 automatic。<br>用法：</p>
+<blockquote>
+<p>用 sublime 打开 test.c 文件，按 F7（或者 ctrl + B），会跳出一个选择，选择最下面的 run，即可，编译运行一键完成。</p>
+</blockquote>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/sublime-text%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0-/11693809-e5d4507f3f2a4437.gif" srcset="/img/loading.gif" alt><br>(我电脑卡，一般编译还是很快的)</p>
+<h3 id="2-Linux"><a href="#2-Linux" class="headerlink" title="2. Linux"></a>2. Linux</h3><p>linux 下一般有 GNU 套件，默认有 gcc 和 g++；如果没有，安装GCC编译器十分简单，终端命令</p>
+<blockquote>
+<p><strong><em><code>sudo apt-get install build-essential</code></em></strong> (ubuntu)<br><strong><em><code>sudo yum install gcc-c++</code></em></strong> (CentOS)<br><strong><em><code>sudo pacman -S gcc</code></em></strong> (ArchLinux，如 manjaro)</p>
+</blockquote>
+<p>输入命令 <strong><em><code>g++ --version</code></em></strong> 若有版本信息，说明安装成功！<br>接下来只需要书写 sublime-build 文件即可，例如在 gnome 桌面下，sublime-build 如下：</p>
+<pre><code>{
+    &quot;encoding&quot;: &quot;utf-8&quot;,
+    &quot;working_dir&quot;: &quot;$file_path&quot;,
+    &quot;shell_cmd&quot;: &quot;g++ -std=c++14\&quot;$file_name\&quot; -lpthread -o \&quot;$file_base_name\&quot;&quot;,
+    &quot;file_regex&quot;: &quot;^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$&quot;,
+    &quot;selector&quot;: &quot;source.c++&quot;,
+
+    &quot;variants&quot;: 
+    [
+        {    
+        &quot;name&quot;: &quot;Run&quot;,
+        &quot;shell_cmd&quot;: &quot;g++ -std=c++14 &#39;$file&#39; -lpthread -o &#39;$file_base_name&#39; &amp;&amp; gnome-terminal -x bash -c \&quot;&#39;${file_path}/${file_base_name}&#39;;read -p &#39;\nmake it !&#39;\&quot;&quot;
+        }
+    ]
+}</code></pre><p>Ctrl + B（或者 F7) 即可调出终端，输出结果。</p>
+<blockquote>
+<p>如果需要链接第三方库：</p>
+<ol>
+<li>log4cpp :<code>-llog4cpp</code></li>
+<li>opencv : <code>pkg-config --cflags --libs opencv</code>，放在<code>\&quot;$file_base_name\&quot;</code>之后有效</li>
+<li>boost :  <code>-lboost_system</code></li>
+<li>Boost.asio(最折腾): <code>-lboost_system -lboost_thread -lboost_filesystem -I/usr/local/include/boost -L/usr/local/lib</code></li>
+</ol>
+</blockquote>
+<h1 id="Python-环境配置"><a href="#Python-环境配置" class="headerlink" title="Python 环境配置"></a>Python 环境配置</h1><h3 id="1-windows"><a href="#1-windows" class="headerlink" title="1. windows"></a>1. windows</h3><p>安装好 Python，书写 sublime-build 文件:</p>
+<pre><code>{
+    &quot;encoding&quot;: &quot;utf-8&quot;,
+    &quot;working_dir&quot;: &quot;$file_path&quot;,
+    &quot;shell_cmd&quot;: &quot;python -u \&quot;$file\&quot;&quot;,
+    &quot;file_regex&quot;: &quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;,
+    &quot;selector&quot;: &quot;source.python&quot;,
+
+    &quot;variants&quot;:
+    [
+        {
+            &quot;name&quot;: &quot;Run&quot;,
+            &quot;shell_cmd&quot;: &quot;start cmd /c \&quot;python -u \&quot;$file\&quot; &amp; pause\&quot;&quot;,
+        }
+    ]
+}</code></pre><h3 id="2-Linux-1"><a href="#2-Linux-1" class="headerlink" title="2. Linux"></a>2. Linux</h3><p>例如在 Gnome 桌面下，sublime-build 如下：</p>
+<pre><code>{
+    &quot;encoding&quot;: &quot;utf-8&quot;,
+    &quot;working_dir&quot;: &quot;$file_path&quot;,
+    &quot;shell_cmd&quot;: &quot;/usr/bin/python3 -u \&quot;$file\&quot;&quot;,
+    &quot;file_regex&quot;: &quot;^[ ]*File \&quot;(...*?)\&quot;, line ([0-9]*)&quot;,
+    &quot;selector&quot;: &quot;source.python&quot;,
+
+    &quot;variants&quot;:
+    [
+        {
+            &quot;name&quot;: &quot;Run&quot;,
+            &quot;shell_cmd&quot;: &quot;gnome-terminal -x bash -c \&quot;python3 &#39;${file}&#39;;read -p &#39;\nYHL make it !&#39;\&quot;&quot;
+        }
+    ]
+}</code></pre><h1 id="Java-配置"><a href="#Java-配置" class="headerlink" title="Java 配置"></a>Java 配置</h1><h3 id="1-Windows-1"><a href="#1-Windows-1" class="headerlink" title="1. Windows"></a>1. Windows</h3><p>安装好 Java 环境之后，书写 sublime-build :</p>
+<pre><code>
+{
+    &quot;shell_cmd&quot;: &quot;ECHO Compiling $file_base_name.java &amp; ECHO ============Out============ &amp; javac -encoding UTF-8 \&quot;$file\&quot; &amp; java \&quot;$file_base_name\&quot;&quot;,
+    &quot;file_regex&quot;: &quot;^(...*?):([0-9]*):?([0-9]*)&quot;,
+    &quot;working_dir&quot;: &quot;${file_path}&quot;,
+    &quot;selector&quot;: &quot;source.java&quot;,
+    &quot;encoding&quot;:&quot;gbk&quot;,
+    &quot;variants&quot;:[
+         {   
+            &quot;name&quot;:&quot;编译&quot;,
+            &quot;shell_cmd&quot;: &quot;ECHO Compiling $file_base_name.java &amp; javac -d . -encoding UTF-8 \&quot;$file\&quot;&quot;,
+        },
+        {   
+            &quot;name&quot;:&quot;运行当前类&quot;,
+            &quot;shell_cmd&quot;:&quot; java \&quot;$file_base_name\&quot; &quot;       
+        },
+        {   
+            &quot;name&quot;:&quot;在cmd中运行&quot;,
+            &quot;shell_cmd&quot;:&quot; start cmd /c \&quot;javac -encoding UTF-8 \&quot;$file\&quot; &amp; java \&quot;$file_base_name\&quot; &amp; pause \&quot;&quot;  
+        }
+   ]
+}</code></pre><h1 id="插件推荐"><a href="#插件推荐" class="headerlink" title="插件推荐"></a><a href="https://www.jianshu.com/p/5497d187be1c" target="_blank" rel="noopener">插件推荐</a></h1>
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8">编辑器</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/sublime">sublime</a>
+                
+                  <a class="hover-with-bg" href="/tags/C++">C++</a>
+                
+                  <a class="hover-with-bg" href="/tags/Python">Python</a>
+                
+                  <a class="hover-with-bg" href="/tags/Java">Java</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "sublime-text 环境配置(持续更新)&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
