@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5 z-depth-3" id="board">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/26/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(3)%20%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(3) 选择排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">选择排序的思路可以说是最简单的了，每次找到最小值或者最大值，相对于冒泡排序来说，没有那么多交换的过程。
+问题描述给定一堆数字，排序
+选择排序的过程思路：每次在剩余数中找最值。
+代码void select_sort(int *arr, const int L) {
+    int min_index, i = 0, j = 0, tmp;
+    for(i = 0;i &lt; L - 1; ++i) {
+        min_index = i;
+        for(j = i + 1;j &lt; L; ++j) 
+            if(arr[j] &lt; arr[min_index]) 
+                min_index = j;
+        if(i != min_index) 
+            _swap(arr[i], arr[min_index]);
+    }
+}
+每次找出一个最小值，L 个数据只需要 L - 1 次筛选，故外层循环控制条件是 i &lt; L - 1。找最小值的过程中，使用一个变量 min_index 存</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-26&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/26/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(2)%20%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(2) 冒泡排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">冒泡排序是入门级的排序算法。当初大一学习它，只是简单地记住了它的代码，用时则写，对于为什么它叫做“冒泡排序”、为什么循环控制条件是 N - 1 和 N - i - 1，为什么比较的是 j 和 j + 1 而不是 i 和 i + 1 没有深刻的理解。这并不是学习算法该有的样子，只会模板，不会根据已有思路创造算法。这样的习惯，导致了我算法基础极其不牢固，代码能力弱。
+问题描述给定一堆数字，排序
+冒泡排序的过程动图可以说是十分形象了。每次从头筛选一个最大值放到剩余数末尾，冒泡排序就是这么简单。中间的交换过程是为了将最大值往后推；并不是每一次都需要交换，当需要交换时，就是“冒泡”的时刻，整个过程看起来就像是冒泡。思路：每次从头筛选一个最大值放到剩余数的末尾。
+代码void bubble_sort(int *arr, const int L) {
+    int i, j, tmp;
+    for(i = 0;i &lt; L - 1; ++i) 
+        for(j = 0;j &lt; (L - i) - 1; ++j)
+            if(arr[j] &gt; arr</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-26&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(1)%20%E6%A1%B6%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(1) 桶排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">说起排序算法，我最先想到的就是桶排序了，《啊哈算法》上的第一个算法，当初学习时，顿感神奇！这种直接定位到下标的技术(哈希)在日后更是常见，用的好可以降低一个级别的时间复杂度。当时，我已了解到的排序算法如冒泡排序、插入排序、选择排序，快速排序等，都有一个明显比较大小的过程，但是桶排序没有，桶排序直接定位到它应该在哪里，然后…
+
+
+
+
+
+
+就没有然后了，一眼望去，排好了。后续接触，才发现《啊哈算法》上讲的桶排序其实是桶范围 = 1的特殊情况（称“计数排序”），其他情况还是需要比较的过程的，但是我还是把书上讲的当作真的桶排序，谁让我对它那么熟悉呢，哈哈。正文开始。
+问题描述给定一堆数字，排序
+桶排序过程：以下过程并非严格的“桶排序”，只是按照《啊哈算法》上的内容设计第一个数字 2， 放到坐标为 2 的桶上，第二个数 7，放到坐标为 7 的桶上，第三个数 1，放到坐标为 1 的桶上，...若干次 “放” 之后，接下来就是“一眼望去”，扫描一遍，即可得到结果：    0 1 2 2 2 3 4 4 4 5 6 7第一次看到这个排序，我就惊了！ 这么巧妙！原理很简单，就是根据数本身，放到下标为数本</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/tags/%E5%93%88%E5%B8%8C">哈希</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(10)%20%E6%80%BB%E7%BB%93/">
+        <p class="h4 index-header">排序(10) 总结</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">代码集合  github
+综述排序问题是个很经典的计算机问题，目标是根据一定的优先级将更重要的数据呈现给人们。例如，在搜索引擎中，给定关键词“希尔排序”，服务器需要汇集并将所有记录按照相关性、时间先后等关键码来排序。用户最希望得到的当然是越相关越好。尽管新的研究方向，例如带有知识的搜索引擎，不再提供多条有序记录供用户挑选而是直接提供最标准的一条答案(夸克浏览器这方面做得还可以)，但排序依旧在很多领域都有广泛的应用。
+回顾(图片来源于网络)以上就是经典的十大排序，说法不一。但可以分为以上两类，其中非比较排序，个人以为可以命名为“借助哈希的排序”，因为它们都利用了类似哈希的方法直接定位或者分级，和其他基于比较的排序不同。当然也存在其他的排序算法，如地精排序、猴子排序等，抑或是基于数据结构性质的排序，后续将另外回顾。以下简单小结以下
+1. 交换排序2. 插入排序3. 选择排序4. 归并排序5. 借助哈希的排序比较
+测评结果机器：Intel(R) Core(TM) i7-7800X CPU @ 3.50GHz 单核数据：测试数据从 1000 ~ 10000000(一亿的数据排序会被操作系统 k</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88dp%EF%BC%89-%E6%9C%80%E7%9F%AD%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">
+        <p class="h4 index-header">动态规划（dp）-最短编辑距离</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">应该是我接触的第一个动态规划的算法，可以说是很经典了，Levenstein 距离。
+问题描述
+设A和B是2个字符串。要用最少的字符操作将字符串A转换为字符串B。这里所说的字符操作包括:(1)删除一个字符;(2)插入一个字符；(3)将一个字符改为另一个字符。将字符串 A 变换为字符串 B 所用的最少字符操作数，称为字符串 A 到 B 的编辑距离,记为d(A,B)。试设计一个有效算法,对任给的2个字符串 A 和 B,计算出它们的编辑距离d(A,B)
+
+input
+输入数据的第一行是一个正整数，表示一共有几组数据。
+
+每组数据有两行，每行一个字符串。
+每个字符串长度不超过1000
+字符串中只含小写英文字母
+
+
+output
+对于每组数据，请输出一个整数表示两个字符串的编辑距离(最短编辑距离)
+
+
+Sample Input :10 AGTCTGACGC11 AGTAAGTAGGC5 abcdy4 abds7 dewjfsr4 ejfrSample output423
+
+推导假设求 ‘abcy’ 和 ‘aby’ 的编辑距离
+
+$dp[i - 1][j] + 1$，
+删除’abcy’中的y —— </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="fas fa-angle-double-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "任时光匆匆流去，我只在乎你&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

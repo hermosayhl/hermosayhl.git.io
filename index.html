@@ -145,29 +145,162 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/25/%E6%8E%92%E5%BA%8F-1-%E6%A1%B6%E6%8E%92%E5%BA%8F/">
-        <p class="h4 index-header">排序(1) 桶排序</p>
+      <a href="/2019/12/14/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(14)%20%E5%A4%96%E9%83%A8%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(14) 外部排序</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">说起排序算法，我最先想到的就是桶排序了，《啊哈算法》上的第一个算法，当初学习时，顿感神奇！这种直接定位到下标的技术(哈希)在日后更是常见，用的好可以降低一个级别的时间复杂度。当时，我已了解到的排序算法如冒泡排序、插入排序、选择排序，快速排序等，都有一个明显比较大小的过程，但是桶排序没有，桶排序直接定位到它应该在哪里，然后…
-
-
-
-
-
-
-就没有然后了，一眼望去，排好了。后续接触，才发现《啊哈算法》上讲的桶排序其实是桶范围 = 1的特殊情况（称“计数排序”），其他情况还是需要比较的过程的，但是我还是把书上讲的当作真的桶排序，谁让我对它那么熟悉呢，哈哈。正文开始。
-问题描述给定一堆数字，排序
-桶排序过程：以下过程并非严格的“桶排序”，只是按照《啊哈算法》上的内容设计第一个数字 2， 放到坐标为 2 的桶上，第二个数 7，放到坐标为 7 的桶上，第三个数 1，放到坐标为 1 的桶上，...若干次 “放” 之后，接下来就是“一眼望去”，扫描一遍，即可得到结果：    0 1 2 2 2 3 4 4 4 5 6 7第一次看到这个排序，我就惊了！ 这么巧妙！原理很简单，就是根据数本身，放到下标为数本</div>
+          <div class="index-text mb-1">文件，磁盘
+</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-14&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/tags/B%E6%A0%91">B树</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/12/08/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(11)%20sort%20%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">
+        <p class="h4 index-header">排序(11) sort 源码剖析</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">sort 源码当然是分两个了，一个是 C 语言的 qsort，一个是 C++ 的 std::sort，二者面向工业，性能自然比我写的高一筹。看看源码也是不错的，能学到很多东西以及技巧，当然， C++ 的 std::sort 可能涉及到很多的模板和函数式，可读性更没那么高。
+性能表现先来瞅一波性能表现：
+qsort 分析
+std::sort 分析内省排序 intro sort
+boost::sort 分析测试代码</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-08&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%84">测评</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/12/08/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(13)%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E4%B8%8B%E7%9A%84%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(13) 数据结构之下的排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">基于树结构的排序线段树平衡树系列：AVL、treap、split_tree
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-08&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/12/08/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(9)%20%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(9) 基数排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">当初学习基数排序，是因为它宣称有 O(N) 级别的排序性能，乍一看，好神奇，还能这样排序？如今回顾，才明白它满足某些条件时，的确具有近似 O(N) 的性能，而且基数排序完全可以理解为桶排序的改进版——之前说过，桶排序有个很大的缺点，那就是存在大量的空间浪费，如下图：
+仅仅是两个元素而已，但桶排序占据的空间却达到了 $10^{8}$，即使是按每 100、10000 分布到若干个桶中，空间浪费依旧很多。基数排序可以看作是从此出发的，将一个数组分解为多位，根据多位的相对比较，能将上图的空间降到 8 甚至更低！同时具有桶排序 O(1) 定位的优点。
+问题描述给定一些无需数字，对它们排序，默认从小到大
+基数排序的过程基本原理，就和上图一样简单：
+
+
+位数多的数字一定更大，例如 340 &gt; 99
+同样的位数，越靠前的位越大，数字也越大，例如 340 &gt; 309
+
+
+但这里涉及到一个概念
+基数到底是什么？一般默认基数 = 10，因为很好理解，10进制，将数字拆分成每一位嘛，所以每一位的取值范围是 0-9，需要 10 个桶。但是当基数 = 100，就是 100 进制，数字按照每两位拆分：如</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-08&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -191,7 +324,296 @@
     </div>
   </div>
 
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/12/08/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(8)%20%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(8) 快速排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">真是不想回顾快速排序，因为当初学习它的时候，由于递归学的很差，快排也不是很好理解（思路与众不同），所以一直把它当作最难的排序。但是，我相信，几年之后的我，一定能学懂它！快排在排序算法中却是最著名的，甚至是全世界应用最多的算法之一，它的发明者Charles Antony Richard Hoare更是获得了图灵奖，名列计算机科学名人堂，他对于计算机与程序语言的发展都做出了卓越贡献(quick_sort、case语句就是他提出的)。上网查查大佬的生平，对我等菜鸟对于科学研究亦是一种激励。
+问题描述给定一些无需数字，对它们排序，默认从小到大
+快速排序的过程快速排序基于以下设定，每次设定一个基准元素（紫色块），将比它小的数都放在左边，比它大的数都放在右边，例如下图：这样做有什么好处呢？如下，以 4 为基准数可以发现，左边区间的数字都一定比右边区间的数字更小！这样一来，每个单独区间的排序只需要考虑自身就够了。如上例，划分为：
 
+然后问题逐渐划分为可解的子问题，如下:最终结果就是已排好序的数组。好了，快速排序结束了！很简单！到此可以自己尝试写代码了。其中细节就是如何最快根据基准元素划分的问题，经典</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-08&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/categories/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B">分而治之</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/12/08/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(7)%20%E5%A0%86%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(7) 堆排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">大二学习数据结构时，我还对各种算法（插入、冒泡这些菜鸡就不参与了，太慢）的性能进行了一个评估，一千万的随机数据，进行排序，结果我记得是堆排序最快，在几个指标上都领先，然后是快速排序，紧接着是归并排序（归并排序慢了一倍吧好像）…然而我写的这几个算法都被 STL 库的 sort 暴捶，趁着这次重新学习算法的兴趣，后续我想分析一波 sort 源码。回到堆排序，之前我就提过，堆排序是选择排序的改进版——选择排序，每次从无序集合中找出最小值，时间复杂度O(N)，找 N - 1 次，整体的时间复杂度就成了 O(N * N)；而堆排序就是采用了“堆”这一数据结构将找最值的时间复杂度降成了O(log2N)，从而奠定了它O(Nlog2N)的威名。
+问题描述给定一些无需数字，对它们排序，默认从小到大
+堆排序的过程(图来源于网络)更详细的动图演示可以参考 Data Structure Visualization第一遍，我并没有看懂，智商捉急，但看了一些网上的解释，例如：
+
+算法描述
+
+将初始待排序关键字序列(R1,R2….Rn)构建成大顶堆，此堆为初始的无序区；
+将堆顶元素R[1]与最后一个元素R[n]交换</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-08&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/29/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(6)%20%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(6) 归并排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">归并排序，几大 O(NlogN) 排序算法之一，也其中是最好理解的排序算法。每次二分，分到可以单独排序，在回溯的过程中不断排序，最后组合得到排好序的数组——“分而治之”。我对分而治之的了解甚少，当初只是理解为“不断递归分解为可解决的子问题”，也仅仅是局限于递归而已。但分而治之不是递归，非递归也可以分而治之，更是五大算法思想之一（分而治之、动态规划、贪心、回溯法、分支界定法）。
+问题描述给定一些无需数字，对它们排序，默认从小到大
+归并排序的过程如上，过程很明了，两个部分 “分” 和 “治”。分——处于搜索子问题的阶段，将问题分解为可直接排序的子问题（一个数字就可以直接排序）；治——处于回溯阶段，将子问题综合成最终解。
+代码首先考虑，如何将原问题多次二分分解为单个元素（可直接得到解）
+考虑存在回溯的过程，递归的方式:
+void merge_sort(int *const arr, const int left, const int right) {
+    if(left &lt; right) {
+        int mid = (left + right) / 2;
+       </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-29&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/categories/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B">分而治之</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/28/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(12)%20%E7%89%B9%E6%AE%8A%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(12) 特殊排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">https://www.itcodemonkey.com/article/12948.html
+地精排序珠排序睡眠排序猴子排序</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/28/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(5)%20%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(5) 希尔排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">对希尔排序的印象不深，数据结构课上讲过，第一个突破O(N * N)的排序算法，时间复杂度是$O(N^{1.3})$，竟然还有指数级别的排序算法，还是小数，相比O(N)的几个排序算法来说，算法性能算不上优秀，相比于 O(N * N)的排序算法来说好一大截，但性能还是不如 O(Nlog2N) 的排序算法，二者的曲线增长趋势相差较大。如今回顾，发现希尔排序在思路上还是很优秀的。
+问题描述给定一堆数字，排序
+希尔排序的过程(1) 设定间隔 interval = 4，将数组根据间隔分为若干个小序列，每个小序列进行插入排序，最终将结果汇合。(2) 设定间隔 interval = 2：(3) 设定间隔 interval = 1：排序完毕。插入排序正是 interval = 1 的情况，同时也保证了数组排序的最终结果一定是对的。那直接插入排序不行吗，为什么还要进行 interval = 4、2 的插入排序？之前讨论过，插入排序在数组正序或者基本有序的情况下，时间复杂度是 O(N)，线性！如果能通过一些微调使得数组基本有序，最后再使用插入排序，岂不是能“逐渐”获得接近O(N)的排序性能！希尔排序正是利用</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/26/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(4)%20%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
+        <p class="h4 index-header">排序(4) 插入排序</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">插入排序，当初大一学的时候总是写不对控制变量，究其原因——思路不清晰，根本没理解插入排序。慕然回首，惊了！竟然是整理扑克牌！
+问题描述给定一堆数字，排序，默认从小到大
+插入排序的过程每次将一个数移动到 “有序集合” 的适当位置，使得原 “有序集合” 仍然有序。思路：整理扑克牌，哈哈
+代码void insert_sort(int *arr, const int L) {
+    int i, j, tmp;
+    for(i = 1;i &lt; L; ++i) {
+        tmp = arr[i];
+        j = i;
+        while(j &gt; 0 &amp;&amp; arr[j - 1] &gt; tmp) {
+            arr[j] = arr[j - 1];
+            --j;
+        }
+        arr[j] = tmp;
+    }
+}
+L　个数字，有序放到 L 个位置，只需要将其中 L - 1 个数字摆好位置，就排好序了，所以外层循环共 L - 1 次。i 从 1 开始主要是i = 0 时一个</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-26&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-double-right"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>排序(7) 堆排序 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 十二月 8日 2019, 8:45 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.6k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      10 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>大二学习数据结构时，我还对各种算法（插入、冒泡这些菜鸡就不参与了，太慢）的性能进行了一个评估，一千万的随机数据，进行排序，结果我记得是堆排序最快，在几个指标上都领先，然后是快速排序，紧接着是归并排序（归并排序慢了一倍吧好像）…然而我写的这几个算法都被 STL 库的 sort 暴捶，趁着这次重新学习算法的兴趣，后续我想分析一波 sort 源码。<br>回到堆排序，之前我就提过，堆排序是选择排序的改进版——选择排序，每次从无序集合中找出最小值，时间复杂度O(N)，找 N - 1 次，整体的时间复杂度就成了 O(N * N)；而堆排序就是采用了“堆”这一数据结构将找最值的时间复杂度降成了O(log2N)，从而奠定了它O(Nlog2N)的威名。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>给定一些无需数字，对它们排序，默认从小到大</p>
+<h2 id="堆排序的过程"><a href="#堆排序的过程" class="headerlink" title="堆排序的过程"></a>堆排序的过程</h2><p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-7-%E5%A0%86%E6%8E%92%E5%BA%8F/20180710152959504.gif" srcset="/img/loading.gif" alt><br>(图来源于网络)<br>更详细的动图演示可以参考 <a href="https://www.cs.usfca.edu/~galles/visualization/HeapSort.html" target="_blank" rel="noopener">Data Structure Visualization</a><br>第一遍，我并没有看懂，智商捉急，但看了一些网上的解释，例如：</p>
+<blockquote>
+<p>算法描述</p>
+<ul>
+<li>将初始待排序关键字序列(R1,R2….Rn)构建成大顶堆，此堆为初始的无序区；</li>
+<li>将堆顶元素R[1]与最后一个元素R[n]交换，此时得到新的无序区(R1,R2,……Rn-1)和新的有序区(Rn),且满足R[1,2…n-1]&lt;=R[n]；</li>
+<li>由于交换后新的堆顶R[1]可能违反堆的性质，因此需要对当前无序区(R1,R2,……Rn-1)调整为新堆，然后再次将R[1]与无序区最后一个元素交换，得到新的无序区(R1,R2….Rn-2)和新的有序区(Rn-1,Rn)。</li>
+<li>不断重复此过程直到有序区的元素个数为n-1，则整个排序过程完成</li>
+</ul>
+</blockquote>
+<p>多读几遍，对照图，emm，当初大二也是这么学算法的，可能算笨的，但有效。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>分为两步：构建最大（小）堆 + 堆筛选最值</p>
+<h2 id="构建最值堆"><a href="#构建最值堆" class="headerlink" title="构建最值堆"></a>构建最值堆</h2><p>借助数组的下标索引，从 0 开始到 L - 1，L 是数组长度，左二子 lson = 2 * 当前下标 + 1，rson = 2 * 当前下标 + 2。假设数组长度 12，则堆是这样根据下标存储在数组中的：</p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-7-%E5%A0%86%E6%8E%92%E5%BA%8F/13-26-19.jpg" srcset="/img/loading.gif" alt><br>可以看出，但数组中的元素不一定满足最值堆的性质，所以需要调整——自下而上（为什么？因为下标索引左右孩子是 2 * i + 1 和 2 * i + 2），每个元素检查自己的两个孩子，如果孩子中的最大值（以最大堆为例）比本身更大，则孩子和自己需要交换值。但这并没有结束，例如：</p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-7-%E5%A0%86%E6%8E%92%E5%BA%8F/13-34-01.jpg" srcset="/img/loading.gif" alt><br>-4 和 两个孩子的值 10、-8 比较，10 比 -8 和 -4 大，所以将 10 和 -4 交换，<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-7-%E5%A0%86%E6%8E%92%E5%BA%8F/13-35-30.jpg" srcset="/img/loading.gif" alt><br>此时并没有结束，-4 继续和自己的两个孩子比较值，发现 6 和 -1 都比自己大，所以将两个孩子中的“更大值”优先调整向上，结果如下：<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-7-%E5%A0%86%E6%8E%92%E5%BA%8F/13-37-01.jpg" srcset="/img/loading.gif" alt><br>之后 -4 继续和自己的孩子比较<br>…<br>…<br>…<br>直到 -4 比自己的两个孩子都更大。<br>从上面的过程，也可以说明为什么要自下而上——下方已经调整好的子树都满足堆的性质，才能保证从根节点调整下来的值沿着某条路径依旧保持堆的性质。<br>代码如下：</p>
+<pre><code class="c">void heap_create(int *arr, const int L){
+    int half = (L - 1) / 2, i;
+    for(i = half;i &gt;= 0; --i) {
+        int tmp, max_index, now = i;
+        while(true) {
+            if(lson &gt;= L - 1) {
+                if(lson == L - 1 &amp;&amp; arr[now] &lt; arr[lson])
+                    _swap(arr[now], arr[lson]);
+                break;
+            }
+            max_index = arr[lson] &gt; arr[rson] ? lson : rson;
+            if(arr[max_index] &gt; arr[now]) {
+                _swap(arr[max_index], arr[now]);
+                now = max_index;
+            }
+            else break;
+        }
+    }
+}</code></pre>
+<p>half ? 因为要和两个孩子比较大小，所以从索引一半开始。<br>代码中每次调整都可以视为“针对下标为 now 的元素对堆进行调整，后续完整代码中调整为 maintain 子函数。</p>
+<h2 id="逐个筛选最值"><a href="#逐个筛选最值" class="headerlink" title="逐个筛选最值"></a>逐个筛选最值</h2><p>好了，现在堆结构已经构建好了，可以开始筛选最值，可以采用一个临时数组，每次存储堆顶的最值，然后删除堆顶，调整堆结构——但为了直接在原数组上操作，直接交换 arr[0] 和 arr[当前最后一个数]，然后当前剩余数 - 1；<br>累计  L - 1 次操作即可将整个数组排序。</p>
+<pre><code class="c">// 堆排序
+void heap_sort(int *arr, const int L) {
+    int operations = L - 1, tmp;
+    while(operations &gt; 0) {
+        _swap(arr[0], arr[operations]);
+        maintain(arr, 0, operations);
+        --operations;
+    }
+}</code></pre>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1. 时间复杂度"></a>1. 时间复杂度</h2><p>假设数据规模为 N。<br>需要筛选 N - 1 次，<br>每次筛选，需要交换一次值 O(1)，然后将根节点的值向下调整，路径最大长度是 O(log2N)——因为下标是连续存储的，堆的深度depth 满足<br>$$ 2^{depth - 1} &lt; N &lt; 2^{depth} $$<br>所以 depth 是 log2N 级别的。<br>在路径中，每次交换需要三次比较，如果交换则有三次赋值操作，都是常数级别。惊喜的是，实际向下调整的路径很可能 &lt; depth。<br>综上，堆排序的时间复杂度是 O(N * log2N)</p>
+<h2 id="2-空间复杂度"><a href="#2-空间复杂度" class="headerlink" title="2. 空间复杂度"></a>2. 空间复杂度</h2><p>排序直接在原数组上进行，这部分不计算。<br>若干变量，i，tmp，max_index……空间复杂度根据不同写法可以将空间复杂度降为 O(1)。</p>
+<h1 id="排序稳定性"><a href="#排序稳定性" class="headerlink" title="排序稳定性"></a>排序稳定性</h1><p>元素交换跨越了区间，当前节点 i 和下标为 2 * i + 1 和 2 * i + 2 的左右孩子存在交换；堆顶元素和最后一个元素交换……堆排序是不稳定的。</p>
+<h1 id="存在的问题与改进等"><a href="#存在的问题与改进等" class="headerlink" title="存在的问题与改进等"></a>存在的问题与改进等</h1><h2 id="1-优化"><a href="#1-优化" class="headerlink" title="1. 优化"></a>1. 优化</h2><p>优化？我暂时没想到。<br>空间复杂度已经 O(1)了，精力不应该放在这里；<br>时间复杂度——筛选 N - 1 次，每次 O(log2N)，最多优化常数级别的交换次数或者缩短路径等等。缩短路径？存不存在先对数据分析，具有统计意义上的最小路径和呢？perhaps。</p>
+<h2 id="2-思考"><a href="#2-思考" class="headerlink" title="2. 思考"></a>2. 思考</h2><blockquote>
+<ul>
+<li>将数据结构引入到排序中，直接解决已有算法复杂度太高的问题，这样的方法数不胜数。以前学习排序，我以为就那么 10 来个经典的再加上几个不怎么出名的奇葩，但当我学习数据结构之后，才发现，不少数据结构稍微改一改就能达到 O(Nlog2N) 的效果。</li>
+<li>面试官比较喜欢问的一个经典问题——筛选一个数组中的最小值，或者第几大数等等……堆就是一种很适合的数据结构，每次查询的时间复杂度低到 O(log2N)，筛选 n 次即可找到第几大数或第几小数。</li>
+<li>虽然堆筛选最值方面已经很优秀了，但是它依旧存在很多问题，例如只能在固定的数组上查询，因为堆是构建在其上的，无法迁移到动态区间上，例如我要在 [1, 10] 找第三大值，然后在 [7, 15] 找第三小值，啊哦，堆还无法改变它自身的最值性质，“最大最小”无法兼有。对此的解法，在我记忆里有平衡树(AVL，treap，split_tree…)、线段树等，这几个更是神奇。</li>
+</ul>
+</blockquote>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p>为了普遍性，声明了比较函数指针，可以选择构建最大堆或者最小堆。<br>终于体验到了原创代码的好处，之前学习算法，写出的都是模板，都是从网上代码研究修改出来的，这样的代码没意思，只有自己根据思路写出代码，才是真正的“抽象 + 自动化”！<br>嘿嘿，网上的堆调整函数基本都是递归写的，很明了，我写完自己的之后再深入学习时才发现递归可以解决它，茅塞顿开，也按照自己的思路写了递归版，但这样的快乐远不及我自己写出了“非递归”版。<br>不过由于是 C 语言写的，不具有 C++ 的模板特性。经过模板封装的堆更具有普适性，日后回顾堆时再写 C++。</p>
+<pre><code class="C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;math.h&gt;
+// 宏定义
+#define _swap(a, b) { tmp = a;  a = b;  b = tmp; }
+#define lson 2 * now + 1
+#define rson 2 * now + 2
+// 定义比较函数
+bool _bigger(const int a, const int b) {return a &gt; b;};
+bool _smaller(const int a, const int b) { return a &lt; b; };
+typedef bool (*compare_type)(const int a, const int b);
+// 声明主要函数
+int *get_array(const int L, const bool _scanf);
+void free_array(int *arr);
+void display_array(int *arr, const int L);
+// 堆排序相关
+void heap_sort(int *arr, const int L);
+void heap_create(int *arr, const int L);
+void maintain(int *arr, int now, const int L, compare_type _compare);
+void shift_down(int *arr, int now, int L, compare_type _compare);
+
+int main() {
+    const int L = 12;
+    int *arr = get_array(L, true);
+    heap_create(arr, L);            // 创建最大堆
+    heap_sort(arr, L);              // 逐个筛选最小值
+    display_array(arr, L);
+    free_array(arr);
+    return 0;
+}
+
+// 堆排序
+void heap_sort(int *arr, const int L) {
+    int operations = L - 1, tmp;
+    while(operations &gt; 0) {
+        _swap(arr[0], arr[operations]);
+        maintain(arr, 0, operations, _bigger);
+        --operations;
+    }
+}
+
+// 给定数组 arr，创建堆
+void heap_create(int *arr, const int L){
+    int half = (L - 1) / 2, i;
+    for(i = half;i &gt;= 0; --i) 
+        maintain(arr, i, L, _bigger);
+}
+
+// 维持最大（小）堆的结构
+void maintain(int *arr, int now, const int L, compare_type _compare) {
+    int tmp, max_index;
+    while(true) {
+        if(lson &gt;= L - 1) {
+            if(lson == L - 1 &amp;&amp; _compare(arr[lson], arr[now]))
+                _swap(arr[now], arr[lson]);
+            break;
+        }
+        max_index = _compare(arr[lson], arr[rson]) ? lson : rson;
+        if(_compare(arr[max_index], arr[now])) {
+            _swap(arr[max_index], arr[now]);
+            now = max_index;
+        }
+        else break;
+    }
+}
+
+// 修改之后的递归版本，名字来源于网络，的确很形象
+void shift_down(int *arr, int now, int L, compare_type _compare) {
+    int tmp;
+    if(lson &gt;= L - 1) {
+        if(lson == L - 1 &amp;&amp; _compare(arr[lson], arr[now]))
+            _swap(arr[now], arr[lson]);
+        return;
+    }
+    int max_index = _compare(arr[lson], arr[rson]) ? lson : rson;
+    if(_compare(arr[max_index], arr[now])) {
+        _swap(arr[max_index], arr[now]);
+        shift_down(arr, max_index, L, _compare);
+    }
+}
+
+// 输入一个数组, 返回数组首地址
+int *get_array(const int L, const bool _scanf) {
+    int i = 0;
+    int *arr = (int *)malloc(L * sizeof(int));
+    if(_scanf == true)
+        for (i = 0; i &lt; L; ++i)
+            scanf(&quot;%d&quot;, &amp;arr[i]);
+    return arr;
+}
+
+// 释放数组 arr
+void free_array(int *arr) {
+    if (arr != NULL) {
+        free(arr);
+        arr = NULL;
+        printf(&quot;\nallocated memory is free&quot;);
+    }
+}
+
+// 打印一个 int 数组，arr 数组指针，L 数组长度
+void display_array(int *arr, const int L) {
+    int i = 0;
+    for (i = 0; i &lt; L; ++i)
+        printf(&quot;%d &quot;, arr[i]);
+    printf(&quot;\n&quot;);
+}
+
+
+</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/%E6%8E%92%E5%BA%8F">排序</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">数据结构</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F">排序</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95">算法</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "排序(7) 堆排序&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

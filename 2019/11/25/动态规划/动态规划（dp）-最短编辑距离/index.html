@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>动态规划（dp）-最短编辑距离 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 十一月 25日 2019, 10:56 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.5k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      10 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>应该是我接触的第一个动态规划的算法，可以说是很经典了，Levenstein 距离。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><blockquote>
+<p>设A和B是2个字符串。要用最少的字符操作将字符串A转换为字符串B。这里所说的字符操作包括:<br>(1)删除一个字符;<br>(2)插入一个字符；<br>(3)将一个字符改为另一个字符。<br>将字符串 A 变换为字符串 B 所用的最少字符操作数，称为字符串 A 到 B 的编辑距离,记为d(A,B)。试设计一个有效算法,对任给的2个字符串 A 和 B,计算出它们的编辑距离d(A,B)</p>
+</blockquote>
+<h2 id="input"><a href="#input" class="headerlink" title="input"></a>input</h2><blockquote>
+<p>输入数据的第一行是一个正整数，表示一共有几组数据。</p>
+<ul>
+<li>每组数据有两行，每行一个字符串。</li>
+<li>每个字符串长度不超过1000</li>
+<li>字符串中只含小写英文字母</li>
+</ul>
+</blockquote>
+<h2 id="output"><a href="#output" class="headerlink" title="output"></a>output</h2><blockquote>
+<p>对于每组数据，请输出一个整数表示两个字符串的编辑距离(最短编辑距离)</p>
+</blockquote>
+<blockquote>
+<p><strong><em>Sample Input</em></strong> :<br>10 AGTCTGACGC<br>11 AGTAAGTAGGC<br>5 abcdy<br>4 abds<br>7 dewjfsr<br>4 ejfr<br><strong><em>Sample output</em></strong><br>4<br>2<br>3</p>
+</blockquote>
+<h1 id="推导"><a href="#推导" class="headerlink" title="推导"></a>推导</h1><p><img src="/images/algorithms/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%8A%A8%E6%80%81%E8%A7%84-dp-%E6%9C%80%E7%9F%AD%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/11-11-52.jpg" srcset="/img/loading.gif" alt><br>假设求 ‘abcy’ 和 ‘aby’ 的编辑距离</p>
+<blockquote>
+<p>$dp[i - 1][j] + 1$，</p>
+<p>删除’abcy’中的y —— 也可以理解为在求 ‘abc’ 和 ‘aby’ 编辑距离的基础上，在 ‘abc’ 尾部插入一个 y，推导而来</p>
+<p>$dp[i][j - 1] + 1$</p>
+<p>删除 ‘aby’ 中的 y, —— 也可以理解为在求 ‘abcy’ 和 ‘ab’编辑距离的基础上，在 ’ab’ 尾部插入一个 y，推导而来</p>
+<p>$ dp[i - 1][j - 1] \qquad{ A[i - 1] = B[j - 1]} $</p>
+<p> 因为 ‘abcy’ 第 i 个字符 ‘y’ 和 ‘aby’ 中当前第 j 个字符  ‘y’ 相等，所以，可以认为在求 ‘abc’ 和 ‘ab’ 编辑距离的基础上没有任何编辑操作，后接一个空字符。</p>
+<p>$ dp[i - 1][j - 1] + 1 \qquad{ A[i - 1] \neq B[j - 1]} $</p>
+</blockquote>
+<h1 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h1><p>求最短编辑距离 <a href="http://poj.org/problem?id=3356" target="_blank" rel="noopener">POJ 3356</a></p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#define Min(a , b , c) (a &lt; b ? (a &lt; c ? a : c) : (b &lt; c ? b : c))
+int dp[1010][1010];
+char s1[1010] , s2[1010];
+
+int main(){
+    // freopen(&quot;Levenshtein.in&quot;, &quot;r&quot;, stdin);
+    int n , m , i , j , cost;
+    while(~scanf(&quot;%d%s%d%s&quot; , &amp;n, s1 , &amp;m, s2)){
+        memset(dp, 0, sizeof(dp));
+        for(i = 0; i &lt;= n; ++i) dp[i][0] = i;  // 另一个字符串长度为 0 时，长度就是本字符串当前长度
+        for(i = 0; i &lt;= m; ++i) dp[0][i] = i;
+        for(i = 1; i &lt;= n; ++i)
+            for(j = 1; j &lt;= m; ++j){
+                // 若当前字符相等，dp[i][j] = dp[i - 1][j - 1]；否则，替换当前字符，编辑次数 +1
+                cost = s1[i - 1] == s2[j - 1] ? 0 : 1;    
+                dp[i][j] = Min(dp[i-1][j] + 1 , dp[i][j - 1] + 1 , dp[i - 1][j - 1] + cost);
+            }    
+        printf(&quot;%d\n&quot;, dp[n][m]);
+    }
+    return 0;
+}</code></pre>
+<p>分析：</p>
+<blockquote>
+<ol>
+<li>dp[i][j] 代表的是句子 s1 到了第 i 个字符，s2 到了第 j 个字符的编辑距离，例如：<br>s1 = ‘abcy’<br>s2 = ‘aby’<br>dp[3][2] 代表 s1的子句 ‘abc’，和 s2 的子句 ‘ab’ 的(最短)编辑距离，是 1<br>根据循环特性，可得 0 &lt;= i &lt; 3，0 &lt;= j &lt; 2，dp[i][j] 都推导出来了。</li>
+<li><code>for(i = 0; i &lt;= n; ++i) dp[i][0] = i;</code><br>初始化推导的首项(类似数组的推导，一般都具有首项)，当两个句子中有一个句子为空，最短编辑距离就是非空的句子长度，在这里，i 代表的是<code>当前</code>的非空句子长度。</li>
+<li><code>cost = s1[i - 1] == s2[j - 1] ? 0 : 1;</code><br>因为字符串从下标0开始存储，所以 s1[i - 1] 代表句子 s1 当前的字符，s2[j - 1] 同理。<br>(1). 如果 s1 和 s2 当前的字符相等，那么 <code>dp[i][j] 有可能是 dp[i - 1[j - 1]</code>，例子：<br>求 ‘abcy’ 和 ‘aby’ 的编辑距离，已知 ‘abc’ 和 ‘ab’ 的编辑距离是 1，恰好最后一个字符 ‘y’ 相等，那么 ‘abcy’ 和 ‘aby’ 的编辑距离可能依旧是 1.<br>(2). 如果 s1 和 s2 当前的字符不相等，说明，在已知 dp[i - 1][j - 1] 的基础，至少还要再编辑一次(替换)，编辑次数 + 1</li>
+<li><code>dp[i][j] = Min(dp[i-1][j] + 1 , dp[i][j - 1] + 1 , dp[i - 1][j - 1] + cost);</code><br>dp[i][j] 可以有三种可能性，从中选最小的距离作为当前的最短编辑距离。</li>
+</ol>
+</blockquote>
+<h1 id="优化-or-变体"><a href="#优化-or-变体" class="headerlink" title="优化 or 变体"></a>优化 or 变体</h1><h2 id="1-滚动数组，降低空间复杂度"><a href="#1-滚动数组，降低空间复杂度" class="headerlink" title="1. 滚动数组，降低空间复杂度"></a>1. 滚动数组，降低空间复杂度</h2><p>观察主循环</p>
+<pre><code class="cpp">for(i = 1; i &lt;= n; ++i)
+    for(j = 1; j &lt;= m; ++j){
+         cost = s1[i - 1] == s2[j - 1] ? 0 : 1;   
+         dp[i][j] = Min(dp[i-1][j] + 1 , dp[i][j-1] + 1 , dp[i-1][j-1] + cost);
+    }</code></pre>
+<p>外循环是 i，i 代表逐行；可以发现，每次推导 dp[i][j] ，都只利用了 dp[i - 1] 的信息，也就是说，推导第 i 层，只需要记录第 i - 1层的状态，所以也只需要存储第 i - 1 层的信息。<br>原来的 dp[1005][1005] 存储的是所有层的状态，现在减少到相邻两层 dp[2][1005]，也就是 dp[0][1005] 和 dp[1][1005]，假设偶数层都存储在 dp[0][1005]，奇数层都存储在 dp[1][1005]。<br>通过判断奇偶数  <code>%2</code>，但位运算 <code>&amp;1</code> 可以略微加速，实现类似“滚动”的效果。<br>故修改代码如下：</p>
+<pre><code class="cpp">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#define Min(a , b , c) (a &lt; b ? (a &lt; c ? a : c) : (b &lt; c ? b : c))
+int dp[2][1010];
+char s1[1010] , s2[1010];
+
+int main(){
+    // freopen(&quot;Levenshtein.in&quot;, &quot;r&quot;, stdin);
+    int n , m , i , j , cost;
+    while(~scanf(&quot;%d%s%d%s&quot; , &amp;n, s1 , &amp;m, s2)){
+        memset(dp, 0, sizeof(dp));
+        for(i = 0; i &lt;= m; ++i) 
+            dp[0][i] = i;
+        for(i = 1; i &lt;= n; ++i) {
+            dp[i &amp; 1][0] = i;    // 因为 dp 只能记录相邻两层的状态，所以不能像原来一样初始化
+            for(j = 1; j &lt;= m; ++j){
+                // 若当前字符相等，dp[i][j] = dp[i - 1][j - 1]；否则，替换当前字符，编辑次数 +1
+                cost = s1[i - 1] == s2[j - 1] ? 0 : 1;     
+                dp[i &amp; 1][j] = Min(dp[(i-1) &amp; 1][j] + 1 , dp[i &amp; 1][j-1] + 1 , dp[(i-1) &amp; 1][j-1] + cost);
+            }   
+        }
+        printf(&quot;%d\n&quot;, dp[n &amp; 1][m]);
+    }
+    return 0;
+}</code></pre>
+<p>前后对比：<br><img src="/images/algorithms/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%8A%A8%E6%80%81%E8%A7%84-dp-%E6%9C%80%E7%9F%AD%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/11-14-01.jpg" srcset="/img/loading.gif" alt><br><img src="/images/algorithms/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%8A%A8%E6%80%81%E8%A7%84-dp-%E6%9C%80%E7%9F%AD%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/11-14-23.jpg" srcset="/img/loading.gif" alt></p>
+<p>可以看出，时间消耗一样，但内存消耗缩小到原来的十几分之一。滚动数组对于这种情况能节省极大内存。同时，也能看出位运算 &amp; 对于程序速度的影响其实很细微。<br>但滚动数组也存在缺点，因为只记录了相邻两层的状态，所以不能找回推导的路径( A如何编辑得到  B )。</p>
+<h2 id="2-递归"><a href="#2-递归" class="headerlink" title="2. 递归"></a>2. 递归</h2><p>根据推导方程，递归的回溯过程是正向的推导。代码如下：</p>
+<pre><code class="c++">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#define Min(a, b, c) (a &lt; b ? (a &lt; c ? a : c) : (b &lt; c ? b : c))
+int dp[1010][1010];
+char s1[1010], s2[1010];
+
+int edit_distance(const int i, const int j) {
+    // 判断边界条件
+    if(i == 0) return j;
+    if(j == 0) return i;
+    // 判断当前两个句子的字符是否一样，是否需要额外的编辑操作
+    const int cost = s1[i - 1] == s2[j - 1] ? 0 : 1;
+    const int a = edit_distance(i - 1, j) + 1;
+    const int b = edit_distance(i, j - 1) + 1;
+    const int c = edit_distance(i - 1, j - 1) + cost;
+    return Min(a, b, c);
+}
+
+int main(){
+    // freopen(&quot;Levenshtein.in&quot;, &quot;r&quot;, stdin);
+    int n, m;
+    while(~scanf(&quot;%d%s%d%s&quot;, &amp;n, s1, &amp;m, s2))
+        printf(&quot;%d\n&quot;, edit_distance(n, m));
+    return 0;
+}</code></pre>
+<p>但是根据题目要求，字符串长度可达 1000，这对于递归来说深度太大，压栈参数多，在 OJ 上会超时，但是递归过程很明晰。<br>注：又掉进了一个坑！</p>
+<pre><code class="cpp">return Min(
+    edit_distance(i - 1, j) + 1,
+    edit_distance(i, j - 1) + 1,
+    edit_distance(i - 1, j - 1) + cost
+);</code></pre>
+<blockquote>
+<p>define 宏定义和递归不可以一起用，宏定义是展开，会计算多次递归，浪费时间与空间！</p>
+</blockquote>
+<h1 id="内容扩展"><a href="#内容扩展" class="headerlink" title="内容扩展"></a>内容扩展</h1><h2 id="1-应用场景"><a href="#1-应用场景" class="headerlink" title="1. 应用场景"></a>1. 应用场景</h2><p>可以用于模糊搜索、找相似度较高的句子，应用有拼写检查、求相似度等。<br>    例如给定两个句子：</p>
+<blockquote>
+<p>A = “最佳的编辑软件” 和<br>B = “最佳的游戏软件”，</p>
+</blockquote>
+<p>二者的最短编辑距离是 2 (2次替换)，那么二者的相似度可以用 1 - 编辑距离/ [len(A) + len(B)]表示，这里是 </p>
+<blockquote>
+<p>1 - 2 / (7 + 7) = 1 - 0.1428 = 0.8571，</p>
+</blockquote>
+<p>编辑距离越短，表示这两个句子经过越少次数的插入或替换等操作即可相互转换，相似度越高</p>
+<h2 id="2-存在的问题"><a href="#2-存在的问题" class="headerlink" title="2. 存在的问题"></a>2. 存在的问题</h2><p>字符串编辑距离只考虑到了句子在“字形”上的距离，并没有考虑到每个字符(短语)背后代表的深层含义，在上个例子中：</p>
+<blockquote>
+<p>“编辑”和“游戏”编辑距离是2，但二者在语义上的差距较大；<br>    考虑“休闲”和“游戏”，字形上的编辑距离也是2，但是二者在语义上无疑更近一步。</p>
+</blockquote>
+<p>对于搜索等任务来说，用户更渴望得到在语义上更相近的答案。<br>    这也是传统文本搜索的弊病，没考虑语义距离；</p>
+<h2 id="3-更好的距离衡量"><a href="#3-更好的距离衡量" class="headerlink" title="3. 更好的距离衡量"></a>3. 更好的距离衡量</h2><p>那么如何衡量词语之间的语义距离呢？词向量给出了答案 ：<a href="https://www.cnblogs.com/pinard/p/7160330.html" target="_blank" rel="noopener">word2vec</a>。</p>
+<p> 基本原理可以直观理解为：</p>
+<ol>
+<li>利用向量代表一个词语，将词语映射到“语义空间”，两个词语之间的距离可以通过它们的向量距离来衡量。</li>
+<li>如果表达【游戏】对 【编辑】与【休闲】的不同距离呢？共现频率的统计，经常出现在一起的词语在语义空间上应该是相近的，例如“游戏”和“休闲”经常出现[在一起开黑、网吧]等相关的上下文中，那么“游戏”和“休闲”在语义空间上就是相似的。但“编辑”和“游戏”几乎不会出现在相似的上下文中，二者的语义距离就很大了。通过梯度下降等算法不断拟合以上的情况，使得【游戏】与【休闲】的向量距离更小，但【游戏】与【编辑】之间的向量距离更大。</li>
+</ol>
+<h2 id="类似的算法"><a href="#类似的算法" class="headerlink" title="类似的算法"></a>类似的算法</h2><p><a href>最大上升子序列</a><br><a href>最大公共子序列</a></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "动态规划（dp）-最短编辑距离&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

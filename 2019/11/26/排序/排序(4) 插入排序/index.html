@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>排序(4) 插入排序 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期二, 十一月 26日 2019, 10:34 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.6k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      10 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>插入排序，当初大一学的时候总是写不对控制变量，究其原因——思路不清晰，根本没理解插入排序。慕然回首，惊了！<br>竟然是整理扑克牌！<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-4-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/22-05-17.jpg" srcset="/img/loading.gif" alt></p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>给定一堆数字，排序，默认从小到大</p>
+<h2 id="插入排序的过程"><a href="#插入排序的过程" class="headerlink" title="插入排序的过程"></a>插入排序的过程</h2><p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-4-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/insertionSort.gif" srcset="/img/loading.gif" alt><br>每次将一个数移动到 “有序集合” 的适当位置，使得原 “有序集合” 仍然有序。<br>思路：整理扑克牌，哈哈</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code class="C">void insert_sort(int *arr, const int L) {
+    int i, j, tmp;
+    for(i = 1;i &lt; L; ++i) {
+        tmp = arr[i];
+        j = i;
+        while(j &gt; 0 &amp;&amp; arr[j - 1] &gt; tmp) {
+            arr[j] = arr[j - 1];
+            --j;
+        }
+        arr[j] = tmp;
+    }
+}</code></pre>
+<p>L　个数字，有序放到 L 个位置，只需要将其中 L - 1 个数字摆好位置，就排好序了，所以外层循环共 L - 1 次。i 从 1 开始主要是i = 0 时一个数不需要重新整理。<br>内层循环就是不断往前交换，找适当的位置，摆放好数字。回想整理扑克牌的过程， 首先我会记住要整理的这张牌，大小是 tmp，然后我要从这张牌的前面的牌 j - 1 开始找起，如果前面的牌 arr[j - 1] 比 tmp 更大，就把前面的牌往后挪，这样一直找下去……直到前面的牌 j’ - 1 已经 &lt;= tmp 了，说明 tmp 找到了要插入的位置 j’，把 j’ 处的牌换成 tmp，arr[j] = tmp。哈哈，突然变得简单了，只要捋清楚整理过程，控制条件还是很好写的。</p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1. 时间复杂度"></a>1. 时间复杂度</h2><p>假设数据规模 N，<br>外层循环至少要整理 N - 1 次<br>内层循环：<br>(1)最坏情况，逆序(5 4 3 2 1)，每次调整都要经历最大次数的挪动，总共挪动次数 (N - 1) + (N - 2) + …… + 2 + 1 = $\frac{N * (N - 1)}{2}$ 次，N - 1 次调整，平均挪动 $\frac{N}{2}$ 次。<br>(2) 最好情况，正序(1 2 3 4 5)，每次调整都不需要往后挪动牌，总共挪动次数 0，计算判断条件等时间复杂度 O(1)。<br>因此，插入排序的时间复杂度，最好是 O(N)，最坏情况下是 O(N ^ N)。</p>
+<h2 id="2-空间复杂度"><a href="#2-空间复杂度" class="headerlink" title="2. 空间复杂度"></a>2. 空间复杂度</h2><p>排序结果存储于原数组，这部分不计算。<br>使用若干临时变量，i, j, tmp，空间复杂度 O(1)。<br>因此，插入排序的空间复杂度是 O(1)</p>
+<h1 id="排序稳定性"><a href="#排序稳定性" class="headerlink" title="排序稳定性"></a>排序稳定性</h1><p>每次要整理的牌是 tmp，我要往前找 &lt;= tmp 的位置 j - 1，第一次遇到这个位置（有序集合中最后一个有可能等于 tmp 的位置），就把 tmp 插入到 j - 1 的后面。所以说，相同的数字，经过插入排序后，原先在前面的数字依旧在前面，因此，插入排序是稳定的。<br>这也与写法有关，如果内层循环终止条件是往前找 &lt; tmp 的位置 j - 1，写法就是 while(j &gt; 0 &amp;&amp; arr[j - 1] &gt;= tmp)，循环终止，找到的是有序集合中第一个有可能等于 tmp 的位置的前面，这时候，插入排序是不稳定的。很明显，这种写法明显需要比较更多的次数才能找到次数。既然可以稳定，为什么要写成不稳定呢？所以，默认插入排序是稳定的。<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-4-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/08-40-50.jpg" srcset="/img/loading.gif" alt><br>给定如上例字，把 3 插入到有序集合{ -4 1 3 3 3 3 7 9 }中，有两种找法，无疑绿色箭头指向的位置消耗的时间更少，而且相同数字的前后顺序不变</p>
+<h1 id="存在的问题与改进"><a href="#存在的问题与改进" class="headerlink" title="存在的问题与改进"></a>存在的问题与改进</h1><p>按照插入排序的过程，整理 N 个数据，至少需要 N - 1 次插入，这个没法优化（如果这个都优化了，那就不是插入排序了，基本思路不能变）。<br>那么优化的过程就在于怎么样最快找到插入的位置、怎么样加快挪动甚至消除挪动。</p>
+<h2 id="1-二分搜索优化"><a href="#1-二分搜索优化" class="headerlink" title="1. 二分搜索优化"></a>1. 二分搜索优化</h2><p>首先考虑怎么样最快找到插入的位置，目标是有序集合。很自然就能想到二分查找（折半查找），大一就接触过它了，玩法真是多变（递归，第一个大于等于，第一个小于……)。<br>为了保持插入排序的稳定性，二分查找目标可以是，第一个大于 tmp 的数在哪里。</p>
+<pre><code class="C">// 在数组的 [l, r] 区间内二分查找 “第一个大于 value” 的位置
+int binary_search(int *arr, int l, int r, const int value){
+    int mid = -1;
+    while(l &lt;= r) {
+        mid = (l + r) &gt;&gt; 1;
+        if(arr[mid] &gt; value) r = mid - 1;
+        else if(arr[mid] &lt;= value) l = mid + 1;
+    }
+    return l;
+}
+
+void insert_sort(int *arr, const int L) {
+    int i, j, tmp, index;
+    for(i = 1;i &lt; L; ++i) {
+        tmp = arr[i];
+        index = binary_search(arr, 0, i - 1, tmp);
+        for(j = i;j &gt; index; --j)
+            arr[j] = arr[j - 1];
+        arr[j] = tmp;
+    }
+}</code></pre>
+<p>对于当前要插入有序集合的数 tmp，二分查找 binary_search 找到第一个大于 tmp 的数在 index，于是将 [index, i - 1] 的数都挪动到 [index + 1, i]，最后再把 tmp 填入 index 处。<br>如何二分找到第一个大于 value 的位置，关键就是改变几个控制条件与返回值。<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-4-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/10-18-33.jpg" srcset="/img/loading.gif" alt><br>二分搜索是经典算法问题，后续我将整理整理，以后就不会怕它了，哈哈。<br>虽然二分搜索可以加速查找插入的位置，但是还有以下几个问题：<br>(1) 找到了插入位置之后，挪动数据的时间复杂度依旧是 O(N * N)，所以插入排序的时间复杂度依旧是 O(N * N)。<br>(2) 二分搜索只有在面对大区间搜索时才具有优势，如果数据量不多，频繁地取中值点、比较中值点数大小等操作，使用二分搜索反而会更慢，还不如直接遍历来的快。<br>直观理解：假设查找的有序区间长度为 $2^{20}$，第一次二分，可以减少的搜索区间长度是 $2^{19}$；第二次二分，可以减少的搜索区间长度是 $2^{18}$……第 18 次二分，可以减少的搜索区间长度是 $2^{2}$；第 19 次二分，可以减少的搜索区间长度是 $2^{1}$……可以看出，区间越短，二分搜索能节约的计算就越少（指数递减），在短区间内执行几次取中值点、比较中值点数大小还不如直接遍历。<br>因此，可以采取折中的策略：当查找地有序区间长度 &gt; 某个阈值，例如 $2^{5}$，就采用二分搜索；否则，直接遍历找插入点。但阈值最佳是多少？没有定论。</p>
+<h2 id="2-跳表-skip-list"><a href="#2-跳表-skip-list" class="headerlink" title="2. 跳表 skip-list"></a>2. 跳表 skip-list</h2><p>以下内容涉及一些数据结构，接受不了可以直接跳过这一小节。<br>二分搜索未能解决数据挪动带来的巨大开销，这是数组的 “连续存储” 特性导致的。那就得寻找 “非连续存储” 的数据结构。<br>最简单的 “非连续存储” 数据结构就是链表，插入的时间复杂度为 O(1)，不存在数据挪动的问题。但是链表不存在下标访问，只能一个连一个访问，在搜索上的时间复杂度是 O(N)，即使链表存储的是有序数据，也不能使用二分搜索。此时我的脑海中冒出了一幅图<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-4-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/11-10-01.jpg" srcset="/img/loading.gif" alt><br>跳表，Skiplist，链表的 “魔改” 版，通过在节点上存储额外的跳转信息，使得链表能够跳跃地访问数据，查找性能接近二分搜索，一次查找时间复杂度O(log2N)，而且跳表地跳转距离不是严格的 2 的指数，而是随机的，更加自由。更加惊喜的是，跳表在构建本身（不断插入数据）的时候就已经对数据排好序了，时间复杂度 O(Nlog2N)，接近快排、归并等著名排序算法。跳表篇幅较长，在此不做介绍。</p>
+<h2 id="3-桶排序？"><a href="#3-桶排序？" class="headerlink" title="3. 桶排序？"></a>3. 桶排序？</h2><p>什么？ 要找到插入的位置？ 桶排序原理也许是某种插入排序！给定要插入的数 tmp，通过哈希定位到它应该在的位置，前后看看离哪个数字最近，就插在它前面(或后面)吧，最后“一眼望去”排队就排在它前面(或后面)。这种插入时间复杂度 O(1)。</p>
+<p>也有一些其他的小优化，例如 while(j &gt; 0 &amp;&amp; arr[j - 1] &gt; tmp) 比较了两次，成本有点高? excuse me ? 对于“吹毛求疵”的做法，例如把 j &gt; 0 去掉，用数组的某一位替代 tmp，进一步节约 tmp……我不反对，哈哈。</p>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><pre><code class="C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;stdbool.h&gt;
+#define _swap(a, b) { tmp = a;  a = b;  b = tmp;  }
+int *get_array(const int L);
+void free_array(int *arr);
+void display_array(int *arr, const int L);
+void insert_sort(int *arr, const int L);
+void insert_sort_plus(int *arr, const int L);
+int binary_search(int *arr, int l, int r, const int value);
+
+int main() {
+    freopen(&quot;input.in&quot;, &quot;r&quot;, stdin);
+    const int L = 12;
+    int *arr = get_array(L);
+    insert_sort_plus(arr, L);
+    display_array(arr, L);
+    free_array(arr);
+    return 0;
+}
+
+// 插入排序
+void insert_sort(int *arr, const int L) {
+    int i, j, tmp;
+    for(i = 1;i &lt; L; ++i) {
+        tmp = arr[i];
+        j = i;
+        while(j &gt; 0 &amp;&amp; arr[j - 1] &gt; tmp) {
+            arr[j] = arr[j - 1];
+            --j;
+        }
+        arr[j] = tmp;
+    }
+}
+
+// 基于二分搜索的插入排序
+void insert_sort_plus(int *arr, const int L) {
+    int i, j, tmp, index;
+    for(i = 1;i &lt; L; ++i) {
+        tmp = arr[i];
+        index = binary_search(arr, 0, i - 1, tmp);
+        for(j = i;j &gt; index; --j)
+            arr[j] = arr[j - 1];
+        arr[j] = tmp;
+    }
+}
+
+// 在数组的 [l, r] 区间内二分查找 “第一个大于 value” 的位置
+int binary_search(int *arr, int l, int r, const int value){
+    int mid = -1;
+    while(l &lt;= r) {
+        mid = (l + r) &gt;&gt; 1;
+        if(arr[mid] &gt; value) r = mid - 1;
+        else if(arr[mid] &lt;= value) l = mid + 1;
+    }
+    return l;
+}
+
+// 输入一个数组, 返回数组首地址
+int *get_array(const int L) {
+    int i = 0;
+    int *arr = (int *)malloc(L * sizeof(int));
+    for (i = 0; i &lt; L; ++i)
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    return arr;
+}
+
+// 释放数组 arr
+void free_array(int *arr) {
+    if (arr != NULL) {
+        free(arr);
+        arr = NULL;
+        printf(&quot;\nallocated memory is free&quot;);
+    }
+}
+
+// 打印一个 int 数组，arr 数组指针，L 数组长度
+void display_array(int *arr, const int L) {
+    int i = 0;
+    for (i = 0; i &lt; L; ++i)
+        printf(&quot;%d &quot;, arr[i]);
+    printf(&quot;\n&quot;);
+}
+</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/%E6%8E%92%E5%BA%8F">排序</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F">排序</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95">算法</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "排序(4) 插入排序&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

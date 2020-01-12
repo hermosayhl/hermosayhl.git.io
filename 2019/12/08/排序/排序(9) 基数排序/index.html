@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>排序(9) 基数排序 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 十二月 8日 2019, 8:52 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    3.1k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      12 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>当初学习基数排序，是因为它宣称有 O(N) 级别的排序性能，乍一看，好神奇，还能这样排序？如今回顾，才明白它满足某些条件时，的确具有近似 O(N) 的性能，而且基数排序完全可以理解为桶排序的改进版——之前说过，桶排序有个很大的缺点，那就是存在大量的空间浪费，如下图：</p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-9-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/23-24-41.jpg" srcset="/img/loading.gif" alt><br>仅仅是两个元素而已，但桶排序占据的空间却达到了 $10^{8}$，即使是按每 100、10000 分布到若干个桶中，空间浪费依旧很多。基数排序可以看作是从此出发的，将一个数组分解为多位，根据多位的相对比较，能将上图的空间降到 8 甚至更低！同时具有桶排序 O(1) 定位的优点。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>给定一些无需数字，对它们排序，默认从小到大</p>
+<h2 id="基数排序的过程"><a href="#基数排序的过程" class="headerlink" title="基数排序的过程"></a>基数排序的过程</h2><p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-9-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/849589-20171015232453668-1397662527.gif" srcset="/img/loading.gif" alt><br>基本原理，就和上图一样简单：</p>
+<blockquote>
+<ul>
+<li>位数多的数字一定更大，例如 340 &gt; 99</li>
+<li>同样的位数，越靠前的位越大，数字也越大，例如 340 &gt; 309</li>
+</ul>
+</blockquote>
+<p>但这里涉及到一个概念</p>
+<h2 id="基数到底是什么？"><a href="#基数到底是什么？" class="headerlink" title="基数到底是什么？"></a>基数到底是什么？</h2><p>一般默认基数 = 10，因为很好理解，10进制，将数字拆分成每一位嘛，所以每一位的取值范围是 0-9，需要 10 个桶。<br>但是当基数 = 100，就是 100 进制，数字按照每两位拆分：<br>如下，每次按 100 取出 ，放入桶中<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-9-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/15-39-47.jpg" srcset="/img/loading.gif" alt><br>收集一波，序列是 1300，658，699，后两位是从小到大有序的；<br>继续按 100 取，<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-9-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/15-41-35.jpg" srcset="/img/loading.gif" alt><br>收集一波，序列是 658，699，1300，前两位也是从小到大有序的，其中 658 因为第一次收集保证了一定在 699 前面，所以它们放在同一个桶中并不影响它们最后的顺序。<br>同理当基数 = 1024，数字就按照 1024 划分：<br>先按照 1024 对 1024 以内的部分排序<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-9-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/15-54-02.jpg" srcset="/img/loading.gif" alt><br>收集一波，序列是 1045，79，999，此时三个数在 1024 以内的部分已经有序<br>再对 1024 * 1024 以内的部分排序：<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-9-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/15-59-03.jpg" srcset="/img/loading.gif" alt></p>
+<p>…<br>…<br>…</p>
+<p>归纳一下基数排序的过程（以基数=10为例，方便理解）：<br>从低位开始，</p>
+<blockquote>
+<ul>
+<li>取出每个数字的当前位值（个十百千），依旧桶排序的程序摆放好</li>
+<li>从 0-9 的桶中收集</li>
+</ul>
+</blockquote>
+<p>为什么从低位开始？例如 340 和 9，位数不匹配，9 并不存在十位数和百位数，但 340 和 9 都具有个位数，要同一位才能进行比较 0 &lt; 9，但是 340 胜在位数。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>代码实现还是有一些技巧的：</p>
+<ol>
+<li>对数组元素进行“规范化”，因为位数要放到下标为整数的桶中(例如 0-9 )，所以基数排序处理的是整数！负数需要将数组元素值进行区间的平移；小数需要将小数规范为整数；字符串需要哈希或表示成可比较的正整数……重要的是最后要把原数组元素还原回来。以下代码只是处理了负数的情况。</li>
+<li>每个桶中会放多少个元素，无人知道，是不确定的，如果直接声明数组，空间浪费较大；动态生成数组，缺少申请的数组大小……为了方便（懒惰），我使用了 std::vector。<pre><code class="C++">// 基数排序
+void radix_sort(int *const arr, const int left, const int right) {
+ const int L = right - left + 1;
+ // 对数组元素进行一定的校正，例如偏移到以 0 开始的整数区间
+ const int min_value = regulation(arr, L);
+ // 初始化 radix 数组，做预处理，后期不必再用 pow 求
+ init_radix_arr();       
+ // 总共要进行 max_radix_len 次收集，最多次 max_radix_len 次
+ const int max_len = get_max_len(arr, L);
+ int i, t, pos, cnt, j;
+ for (t = 0;t &lt; max_len; ++t) {
+     // 根据第 t 位数摆放到 0 - (radix - 1) 桶中
+     std::vector&lt;int&gt; buckets[radix];
+     for (i = 0;i &lt; L; ++i) {
+         pos = get_bucket_pos(arr[i], t);
+         buckets[pos].emplace_back(arr[i]);
+     }
+     // 收集一波
+     cnt = -1;
+     for (i = 0;i &lt; radix; ++i) {
+         const int _len = buckets[i].size();
+         for (j = 0;j &lt; _len; ++j)
+             arr[++cnt] = buckets[i][j];
+     }
+ }
+ // 将数组元素偏移回来
+ for (i = 0;i &lt; L; ++i) arr[i] += min_value;
+}</code></pre>
+</li>
+</ol>
+<h2 id="更新-12-15"><a href="#更新-12-15" class="headerlink" title="更新 12.15"></a>更新 12.15</h2><p>为了代码的统一性，还是强制自己写了一回 C 语言的基数排序。原理一致，只不过利用 _count 统计了每个桶放了多少个数字，从而扫描每个数字，看这个数字放在哪个桶的第几个数上，然后放在对应的位置上即可。</p>
+<pre><code class="C">// C 版基数排序
+void radix_sort(int *const arr, const int left, const int right) {
+    const int L = right - left + 1;
+    // 对数组元素进行一定的校正，例如偏移到以 0 开始的整数区间
+    const int min_value = regulation(arr, L);
+    // 初始化 radix 数组，做预处理，后期不必再用 pow 求
+    init_radix();       
+    // 初始化一些辅助数组
+    int *_count = (int *)malloc(sizeof(int) * (radix + 1));
+    int *pos = (int *)malloc(sizeof(int) * L);
+    int *sub = (int *)malloc(sizeof(int) * L);
+    int i, t;
+    // 总共要进行 max_radix_len 次收集，最多次 max_radix_len 次
+    const int max_len = get_max_len(arr, L);
+    for (t = 0;t &lt; max_len; ++t) {
+        memset(_count, 0, sizeof(int) * (radix + 1));
+        for (i = 0;i &lt; L; ++i) {
+            sub[i] = arr[i];
+            pos[i] = get_bucket_pos(sub[i], t); // 放在哪个桶
+            ++_count[pos[i] + 1];  // 这个桶的下一个桶的位置后挪一位, 在后面体现
+        }
+        for (i = 1;i &lt;= radix; ++i) // 计算每一个桶的开始位置
+            _count[i] += _count[i - 1];
+        for (i = 0;i &lt; L; ++i) {
+            const int index = _count[pos[i]]++; // 这个放在 pos[i] 的数字, 该放在哪里
+            arr[index] = sub[i];
+        }
+    }
+    // 这样的写法....可惜不能用 RAII; 日后用内存池替换
+    free(sub);
+    free(pos);
+    free(_count);
+    // 将数组元素偏移回来
+    for (i = 0;i &lt; L; ++i) arr[i] += min_value;
+}</code></pre>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1. 时间复杂度"></a>1. 时间复杂度</h2><p>假设数据规模 N<br>假设数据最大值为  Q，基数为 R，那么总共要收集 $K = \log_{R}{Q}$ 次；<br>每一次收集比较，都要取出每个数的当前位的值O(1)，放到桶中O(1)，共 N 个数，累计 2 * N 次操作，收集遍历的长度恰好是 N，累计 3 * N 次操作。<br>所以，时间复杂度是 $O(N * K)$。<br>其中 $K = \log_{R}{Q}$,是对数得到的，一般都很小，大部分情况都满足 N &gt;&gt; K，即时间复杂度逼近 O(N)。</p>
+<blockquote>
+<p>基数为 10 最好理解了。假设最大值 Q = 100000000，基数 R = 10，那么要收集 K = $log_{10}{100000000} = 8$ 次，代表有 8 位</p>
+</blockquote>
+<h2 id="2-空间复杂度"><a href="#2-空间复杂度" class="headerlink" title="2. 空间复杂度"></a>2. 空间复杂度</h2><p>就地排序，这部分不计算。<br>若干变量，i,j,cnt等，O(1)。<br>K 次收集，每次收集都要创建桶，桶的容量理论上是 N，但每次都可以回收桶内存，所以空间复杂度是 O(N + K)。</p>
+<h1 id="稳定性分析"><a href="#稳定性分析" class="headerlink" title="稳定性分析"></a>稳定性分析</h1><p>每次放入桶中，两个相同的数字都是按照读取的顺序放入的；每次收集（取出），处于同一桶内的两个相同数字，也是按照读取的顺序取出的，不存在顺序改变的情况，因此基数排序是稳定排序。</p>
+<h1 id="分析与优化"><a href="#分析与优化" class="headerlink" title="分析与优化"></a>分析与优化</h1><h2 id="1-基数如何选取？"><a href="#1-基数如何选取？" class="headerlink" title="1. 基数如何选取？"></a>1. 基数如何选取？</h2><p>基数到底是什么？大家默认的基数就是 10，因为生活中都是以 10 进制表示数字的，但是 10 一定是最好的吗？<br>从应用场景来看</p>
+<blockquote>
+<p>基数排序的一个经典例子就是给扑克牌排序——扑克配由两个基数组成：花色(桃&lt;心&lt;梅&lt;方) + 面值，对于花色来说，并不存在数字形式的基数，但可以视作(1&lt;2&lt;3&lt;4)；对于面值来说，基数是 13，而不是10。两个基数可以选择优先级，先按花色排序还是先按照面值排序。由此可以看出，基数不是固定的，而是可以根据应用灵活多变的，照样可以很快地排序。</p>
+</blockquote>
+<p>从运行效率来看</p>
+<blockquote>
+<p>一般的基数排序都会默认 10，但是根据时间复杂度 $O(N\log_{R}{Q})$ 可以看出，基数排序的效率取决于三个数 N、R、Q，其中N 和 Q 是固定的，R 是自行设计的，所以 R 越小，理论上时间复杂度就相对更低。<br>假设最大值达到了 $10^{8}$ 级别</p>
+<ul>
+<li>基数 R = 10，共需要收集 8 次</li>
+<li>基数 R = 100，共需要收集 4 次</li>
+<li>基数 R = 10000，共需要收集 2 次<br>……<br>差别很明显，但是相应地空间复杂度也升上去了，例如基数100就需要 100 个桶，基数 10000 就需要 10000 个桶。</li>
+</ul>
+<p>一般而言，100 或 1000 就足够了。为了利用位运算的优势，甚至有基数为 1024 的情况。</p>
+</blockquote>
+<h2 id="2-存在的问题？"><a href="#2-存在的问题？" class="headerlink" title="2. 存在的问题？"></a>2. 存在的问题？</h2><p>由上可见，基数排序适合那些可以分解为多个基数的数据排序，对于字符串、结构体等可能需要另外的方式。<br>其他方面，都接近 O(N) 了，我还能要求什么呢，哈哈！</p>
+<h2 id="3-性能优化"><a href="#3-性能优化" class="headerlink" title="3. 性能优化"></a>3. 性能优化</h2><p>原理上很难再做出优化了，但自己写了基数排序后，再上网看看其他人怎么写的基数排序，才明白“原理大家都对，但是现实中的性能表现就是不如别人”。<br>这位博主的文章<a href="https://blog.csdn.net/yutianzuijin/article/details/22876017" target="_blank" rel="noopener">基数排序的性能优化</a>写的很好，为了优化性能简直是“无所不用其极”，介绍了很多小 trick，对我有不少启发——为此，该博主还做了对比实验一一验证了他提出的小 trick，其在细节和性能表现上的追求精神更是值得我们学习。</p>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p>为了简便，直接使用了 C++ 的容器 std::vector，并且没有正式 C 调用 C++，而是借助 C++ 的强大兼容性……<br>不用 std::vector 也可以写，但是代码没有那么好理解了。<br>当然，借鉴了那位博主提出的一些 trick。</p>
+<pre><code class="C">#include &lt;math.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;vector&gt;
+int *get_array(const int L);
+void free_array(int *arr);
+void display_array(int *arr, const int L);
+// 基数排序相关
+static const int radix = 10; // 基数
+const int radix_size = ceil(log(INT_MAX) / log(radix)); // 按照基数划分需要收集多少趟
+static double radix_arr[radix_size]; // 预先计算好每一位的最低值并存储
+void radix_sort(int *const arr, const int left, const int right);
+int regulation(int *const arr, const int L);
+void init_radix_arr(); 
+int get_bucket_pos(const int value, const int level);
+int get_max_len(const int *const arr, const int L);
+
+int main() {
+    const int L = 12;
+    int *arr = get_array(L);
+    radix_sort(arr, 0, L - 1);
+    display_array(arr, L);
+    free_array(arr);
+    return 0;
+}
+
+// C++ 版基数排序
+void radix_sort(int *const arr, const int left, const int right) {
+    const int L = right - left + 1;
+    // 对数组元素进行一定的校正，例如偏移到以 0 开始的整数区间
+    const int min_value = regulation(arr, L);
+    // 初始化 radix 数组，做预处理，后期不必再用 pow 求
+    init_radix_arr();       
+    // 总共要进行 max_radix_len 次收集，最多次 max_radix_len 次
+    const int max_len = get_max_len(arr, L);
+    int i, t, pos, cnt, j;
+    for (t = 0;t &lt; max_len; ++t) {
+        // 根据第 t 位数摆放到 0 - (radix - 1) 桶中
+        std::vector&lt;int&gt; buckets[radix];
+        for (i = 0;i &lt; L; ++i) {
+            pos = get_bucket_pos(arr[i], t);
+            buckets[pos].emplace_back(arr[i]);
+        }
+        // 收集一波
+        cnt = -1;
+        for (i = 0;i &lt; radix; ++i) {
+            const int _len = buckets[i].size();
+            for (j = 0;j &lt; _len; ++j)
+                arr[++cnt] = buckets[i][j];
+        }
+    }
+    // 将数组元素偏移回来
+    for (i = 0;i &lt; L; ++i) arr[i] += min_value;
+}
+
+// 将数组偏移到以 0 开始，其他数据类型可以另外设计，例如 float 乘以某个大值，字符串哈希成某个值等等
+int regulation(int *const arr, const int L) {
+    int min_value = INT_MAX, i;
+    for (i = 0;i &lt; L; ++i)
+        if(arr[i] &lt; min_value)
+            min_value = arr[i];
+    for (i = 0;i &lt; L; ++i)
+        arr[i] -= min_value;
+    return min_value;
+}
+
+// 预处理小 trick，空间换时间
+void init_radix_arr() {
+    int i;
+    for (i = 0;i &lt; radix_size; ++i) 
+        radix_arr[i] = 1.0 / pow(radix, i);
+}
+
+// 获取 value 第 t 位的值
+// inline
+int get_bucket_pos(const int value, const int t) {
+    return int(value * radix_arr[t]) % radix;
+}
+
+// 获取最多需要收集多少次，基数 = 10 时就是最大值有多少位
+int get_max_len(const int *const arr, const int L) {
+    int max_value = arr[0], i;
+    for (i = 1;i &lt; L; ++i)
+        if(arr[i] &gt; max_value)
+            max_value = arr[i];
+    return ceil(log(max_value) / log(radix));
+}
+
+// 输入一个数组, 返回数组首地址
+int *get_array(const int L) {
+    int i = 0;
+    int *arr = (int *)malloc(L * sizeof(int));
+    for (i = 0; i &lt; L; ++i)
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    return arr;
+}
+
+// 释放数组 arr
+void free_array(int *arr) {
+    if (arr != NULL) {
+        free(arr);
+        arr = NULL;
+        printf(&quot;\nallocated memory is free\n&quot;);
+    }
+}
+
+// 打印一个 int 数组，arr 数组指针，L 数组长度
+void display_array(int *arr, const int L) {
+    int i = 0;
+    for (i = 0; i &lt; L; ++i)
+        printf(&quot;%d &quot;, arr[i]);
+    printf(&quot;\n&quot;);
+}
+</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/%E6%8E%92%E5%BA%8F">排序</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F">排序</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95">算法</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%93%88%E5%B8%8C">哈希</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "排序(9) 基数排序&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

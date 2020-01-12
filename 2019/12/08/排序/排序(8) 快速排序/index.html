@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>排序(8) 快速排序 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 十二月 8日 2019, 8:50 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    3.8k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      14 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>真是不想回顾快速排序，因为当初学习它的时候，由于递归学的很差，快排也不是很好理解（思路与众不同），所以一直把它当作最难的排序。但是，我相信，几年之后的我，一定能学懂它！<br>快排在排序算法中却是最著名的，甚至是全世界应用最多的算法之一，它的发明者<a href="https://en.wikipedia.org/wiki/Tony_Hoare" target="_blank" rel="noopener">Charles Antony Richard Hoare</a><br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/19-02-18.jpg" srcset="/img/loading.gif" alt><br>更是获得了图灵奖，名列计算机科学名人堂，他对于计算机与程序语言的发展都做出了卓越贡献(quick_sort、case语句就是他提出的)。上网查查大佬的生平，对我等菜鸟对于科学研究亦是一种激励。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>给定一些无需数字，对它们排序，默认从小到大</p>
+<h2 id="快速排序的过程"><a href="#快速排序的过程" class="headerlink" title="快速排序的过程"></a>快速排序的过程</h2><p>快速排序基于以下设定，每次设定一个基准元素（紫色块），将比它小的数都放在左边，比它大的数都放在右边，例如下图：<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-22-35.jpg" srcset="/img/loading.gif" alt><br>这样做有什么好处呢？<br>如下，以 4 为基准数<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-26-25.jpg" srcset="/img/loading.gif" alt><br>可以发现，左边区间的数字都一定比右边区间的数字更小！<br>这样一来，每个单独区间的排序只需要考虑自身就够了。<br>如上例，划分为：</p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-29-51.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-29-58.jpg" srcset="/img/loading.gif" alt><br>然后问题逐渐划分为可解的子问题，如下:<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-22-43.jpg" srcset="/img/loading.gif" alt><br>最终结果就是已排好序的数组。<br>好了，快速排序结束了！很简单！<br>到此可以自己尝试写代码了。其中细节就是如何最快根据基准元素划分的问题，经典的有“挖坑法”和“指针交换”、“前后指针”等方法。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="1-划分为子问题"><a href="#1-划分为子问题" class="headerlink" title="1. 划分为子问题"></a>1. 划分为子问题</h2><blockquote>
+<p>这里是快速排序的精髓所在（为什么？因为如何划分很简单，重要的是能想到通过“划分”的手段减少排序所需的计算量！网上不少资料和代码都将重点放在了如何划分上，什么“占坑”、“指针交换”等等如何划分上去了，个人认为有些“喧宾夺主”的意味，如何划分在快速排序的思想上根本就没有提到，它只不过是其中一个细节实现而已，当初我就是一直纠结于这个实现上，调各种临界条件、考虑各种特殊情况……最终就是，我对快排的印象就只留下了“它的临界条件不好写”、“我老是写不对”，后悔）。</p>
+</blockquote>
+<p>我的脑海中有这么一张图：<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-22-43.jpg" srcset="/img/loading.gif" alt><br>很简单嘛，每次找一个交汇点的位置，然后将数组划分为左右两部分，左右两部分递归该过程。<br>临界条件：只要区间存在，就需要划分为子问题。</p>
+<pre><code class="C">void quick_sort(int *arr, const int left, const int right) {
+    if (left &lt; right) {
+        int base = patition(arr, left, right); // 找一个交汇点
+        quick_sort(arr, left, base - 1); // 对左边划分
+        quick_sort(arr, base + 1, right);// 对右边划分
+    }
+}</code></pre>
+<p>全程，快速排序到底在哪里进行“排序”操作的？<br>划分！<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-22-35.jpg" srcset="/img/loading.gif" alt><br>如图，每次快速排序都能找出一个基准值，将它放在它“应该在”的位置，这就是一个排序的操作，排序结果不就是每个数字按照从小到大摆放在它应该在的位置的么？快速排序在不断划分的过程，就是不断确认每一个元素应该在的位置。</p>
+<blockquote>
+<p>根据“递归皆可迭代”，对于亿万数据来说，递归是有可能爆栈的，而且非递归没有创建堆栈和函数调用的开销。</p>
+</blockquote>
+<p>所以，基本框架不变，只需要自己保存区间信息即可：</p>
+<pre><code class="C">// 非递归版
+void quick_sort_plus(int *arr, int left, int right) {
+    int *_stack = (int *)malloc(sizeof(int) * (right - left + 1) * 2);
+    int cnt = -1, base;
+    _stack[++cnt] = left;
+    _stack[++cnt] = right;
+    while(cnt &gt;= 1) { // 还存在区间未处理
+        right = _stack[cnt--]; // 注意这两句的顺序
+        left = _stack[cnt--];
+        if(left &lt; right) {
+            base = patition(arr, left, right);
+            if(base + 1 &lt; right) {
+                _stack[++cnt] = base + 1;
+                _stack[++cnt] = right;
+            }
+            if(left &lt; base - 1) {
+                _stack[++cnt] = left;
+                _stack[++cnt] = base - 1;
+            }
+        }
+    }
+    free(_stack);
+}</code></pre>
+<p>注意点如下：</p>
+<blockquote>
+<ol>
+<li>_stack 为什么要 new ? 如果直接声明数组，例如 int _stack[N],是存储在栈上的，这样的写法并不能完全解决“爆栈”的问题，因为要保存的堆栈信息是一样多的（为什么一样？因为要排序的区间和递归版的一模一样），只是减少了函数调用的开销而已。</li>
+<li>_stack 数组为什么大小是数组元素个数 = (right - left + 1) * 2？因为最差的情况下，每次划分的基准元素都是最值，这样一来，递归深度 = 数组元素个数，每次存储两个元素（区间）。这样做是考虑了最差的情况，存在一定的空间浪费，如果可以的话，我当然直接 std::vector 和 std::list 了，但为了强制自己写 C 语言，emm。</li>
+<li>注意 cnt 代表的是栈顶下标，每次取出两个元素，所以终止条件是 cnt &gt;= 1 说明 _stack 中至少还有两个元素。</li>
+<li>注意 right 和 left 取出的顺序，因为栈的特性，后进先出，所以区间要对应好。至于左右区间的先后问题，先后并不影响结果——因为基准元素保证了左区间所有元素都小于右区间所有元素，二者之间不存在逆序对。</li>
+</ol>
+</blockquote>
+<h2 id="2-如何划分："><a href="#2-如何划分：" class="headerlink" title="2. 如何划分："></a>2. 如何划分：</h2><p>我比较熟悉的就是指针交换法了，根据 4 划分<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-32-03.jpg" srcset="/img/loading.gif" alt><br>不断比较，</p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-36-44.jpg" srcset="/img/loading.gif" alt><br>发现，2 比 4 更小，6 比 4 更大，因此第一次交换，<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-36-16.jpg" srcset="/img/loading.gif" alt><br>直到左右两个部分汇合，</p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-35-40.jpg" srcset="/img/loading.gif" alt><br>此时，根据交汇点，将 4 交换到交汇点所在的位置</p>
+<p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-38-27.jpg" srcset="/img/loading.gif" alt></p>
+<blockquote>
+<p>找出一个基准值 base_value，划分小于 base_value 和 大于 base_value:</p>
+<ul>
+<li>从右划分大于的部分，直到某个值小于 base_value，此时划分出的右区间都比 base_value 更大。</li>
+<li>从左边划分小于的部分，直到某个值大于 base_value，此时划分的左区间都比 base_value 更小。</li>
+<li>重复以上两个过程直到左右区间合并，交汇点就是 base_value “应该在”的地方，于是将 base_value 交换到交汇点</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>这样一来，base_value 左边都是小于等于它的，右边都是大于等于它的</p>
+</blockquote>
+<pre><code class="C">int patition(int *arr, int left, int right) {
+    int base_value = arr[left], tmp, base_pos = left;
+    while (left &lt; right) {
+        while (arr[right] &gt;= base_value &amp;&amp; left &lt; right)
+            --right;
+        while (arr[left] &lt;= base_value &amp;&amp; left &lt; right) 
+            ++left;
+        _swap(arr[left], arr[right]);
+    }
+    _swap(arr[base_pos], arr[right])
+    return right;
+}</code></pre>
+<p>如何划分，在网上有很多种思路，但我不想把重心放在这里。因为我认为重点是“快速排序到底是如何实现排序的”。</p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1. 时间复杂度"></a>1. 时间复杂度</h2><p>假设数据规模 N</p>
+<h3 id="1-最好"><a href="#1-最好" class="headerlink" title="(1). 最好"></a>(1). 最好</h3><p>最好的情况，每次都是以中位数为基准划分的，递归树接近满二叉树，层数级别 $\log_2 N$，每一层需要将区间首的基准元素交换到左右部分的汇合点，左边小于右边大于，所以需要遍历比较每一个元素，每一层需要遍历 1~ N 个元素，平均 $\frac{N}{2}$ 个元素，所以最好的时间复杂度是 $O(N\log_2N)$。</p>
+<h3 id="2-最差"><a href="#2-最差" class="headerlink" title="(2). 最差"></a>(2). 最差</h3><p>最差的情况，每次都是以最值为基准划分的，递归树接近直线，层数级别 N，每一层平均 $\frac{N}{2}$ 个，解析同上。所以时间复杂度是 O($N^{2}$)。特说明，此时快速排序就成了冒泡排序。</p>
+<h3 id="3-平均"><a href="#3-平均" class="headerlink" title="(3). 平均"></a>(3). 平均</h3><p>平均情况下，时间复杂度处于 $O(N\log_2 N)$ 和 $O(N^{2})$ 之间。《算法导论》中证明了平均性能 $O(N\log_2 N)$，较为复杂。</p>
+<h2 id="2-空间复杂度"><a href="#2-空间复杂度" class="headerlink" title="2. 空间复杂度"></a>2. 空间复杂度</h2><p>就地排序，这部分不考虑；<br>若干变量，left, base, right，因为理想情况下递归深度为 $\log_2 N$ 层，最多 N 层，考虑保存栈中的区间信息，空间复杂度为 O($\log_2 N$)~ O(N)。</p>
+<h1 id="稳定性分析"><a href="#稳定性分析" class="headerlink" title="稳定性分析"></a>稳定性分析</h1><p>快速排序是不稳定的排序，因为元素之间的交换跨越区间，例如每次将基准元素放在 left 以及划分完毕时将 left 元素交换到汇合点，这些都会导致不稳定。</p>
+<h1 id="分析与优化"><a href="#分析与优化" class="headerlink" title="分析与优化"></a>分析与优化</h1><h2 id="1-为什么要从右边开始找起？"><a href="#1-为什么要从右边开始找起？" class="headerlink" title="1. 为什么要从右边开始找起？"></a>1. 为什么要从右边开始找起？</h2><p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/20-21-39.jpg" srcset="/img/loading.gif" alt><br>这一点我当初在《啊哈算法》上看到过，只是略微想了想，没想明白。如今回顾（图来自《啊哈算法》）：<br>假设从左边划分小于 6 的数开始，直到 9，发现 9 &gt; 6；再从右边开始划分大于 6 的数字，因为左边区域已经到了 9，所以从右边最多只能划分到 9，汇合点 9！再将 6 交换到汇合点，9 排在了 6 的前面，有问题！<br>问题发生在哪里？从右边开始划分应该一直找到 3 的，但因为左边区域已经囊括了 3，甚至是 9，所以右边只能被迫停在“比 6 更大”的数字 9 上，之后 9 就被交换到了 6 所在的位置。<br>总结一下，最后汇合点的位置一定是先出发那一边找到的值，而汇合点之后要和基准值交换，汇合点的值应该放在左边还是右边就需要注意了：</p>
+<blockquote>
+<ul>
+<li>如果从更小部分开始划分，汇合点的值一定是大于基准值的，要和基准值交换，只要保证基准值在更大的区间</li>
+<li>如果从更大部分开始划分，汇合点的值一定是小于基准值的，要和基准值交换，只要保证基准值在更小的区间</li>
+</ul>
+</blockquote>
+<p>这样一来汇合点就会放在它应该在的部分，就不会有这个问题了。</p>
+<h2 id="2-如何选择基准元素？"><a href="#2-如何选择基准元素？" class="headerlink" title="2. 如何选择基准元素？"></a>2. 如何选择基准元素？</h2><p>从时间复杂度分析可以看出，理想情况下的划分是二分的，也就是说，每次挑选的基准元素是中位数。但如果每次遍历找中位数，会大大增大时间复杂度。是否存在快速寻找中位数的方法呢？或者提供近似中位数的性能？</p>
+<ol>
+<li>无额外信息的情况下，从一个无序序列中找出中位数，时间复杂度至少是 O(N)，因为一定需要扫描每个元素；</li>
+<li>近似中位数？考虑随机，从无序区间中随机选择一个数字作为基准元素。现实性能还不错。<br>为什么呢？</li>
+</ol>
+<blockquote>
+<ul>
+<li>从概率的角度来看，围绕中位数存在一个“甜品区”<br><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-8-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/22-38-04.jpg" srcset="/img/loading.gif" alt><br>如图，中位数 13，围绕 13 左右存在一个甜品区，只要随机数能选到这些“近似中位数”的数，那么一次划分的效果就不会差。假设甜品区占据了整个区间的 $p，0 &lt; p &lt; 1$，那么每次随机选择到“甜品区”的概率就是 $p$，选的值不好的概率就是 $1 - p$——在快速排序的过程中，假设划分次数是 $n，\log_2 N &lt;= n &lt;= N$，选中甜品区的次数是 $m，m &lt;= n$，最差的情况 m = 0，概率为 $(1 - p) ^ {n}$，当 n 足够大时，$(1 - p) ^ {n}$近似为 0，也就是说，几乎不可能很差；最好的情况 m = n，概率为 $p ^ {n}$，当 n 一定时，概率可以不为 0，这说明有可能达到最好的性能，完美的O($N\log_2 N$) 时间复杂度。只要 p 够大，甜品区够大，平均性能还是可以逼近 O($N\log_2 N$) 的。</li>
+<li>从“最大熵”的角度来看，在没有更多约束或更多了解的情况下做最保险、风险最小的决策，假设各种情况概率相等从而实现最大熵。体现在这里就是，我们并不知道中位数是哪个？选择第一个，还是选择第五个，还是选择第……不知道，在没有额外信息的情况下，我们认为每一个位置的数字是中位数的概率是一样的，这样的决策是风险最小的，不仅如此，它的计算量低到 O(1)。这样的思想在遗传进化算法中应用颇多。</li>
+</ul>
+</blockquote>
+<p>随机在统计（大数据）下是具有一定的优势的，这一点我在学习 treap 二叉树时就体会到了，在大数据的均衡下，treap 是近似满二叉树的，原理简单，性能强劲，是我最喜欢的平衡二叉树。</p>
+<h2 id="3-其他划分方法"><a href="#3-其他划分方法" class="headerlink" title="3. 其他划分方法"></a>3. 其他划分方法</h2><p>如何根据基准元素划分成大小两部分有很多方法，网上大多流传“挖坑法”和“指针法”。本质没有复杂度级别上的改变，在此不作赘述。</p>
+<h2 id="4-小区间直接插入排序"><a href="#4-小区间直接插入排序" class="headerlink" title="4. 小区间直接插入排序"></a>4. 小区间直接插入排序</h2><p>老规矩，递归处理小区间时，由于构建堆栈和函数调用的开销，采用简单的排序反而效果很好。是否起效果，期待后续测评。</p>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><pre><code class="C">#include &lt;time.h&gt; 
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;stdbool.h&gt;
+// 宏定义
+int tmp;
+#define _swap(a, b) { tmp = a;  a = b;  b = tmp;  }
+#define _rand(a, b) a + rand() % (b - a + 1)
+// 区间够短时，采用插入排序会更有效 数据量较大时可以动态调整 small_limit
+#define small_limit 3
+void insert_sort(int *arr, const int L); 
+// 常规操作
+int *get_array(const int L);
+void free_array(int *arr);
+void display_array(int *arr, const int L);
+// 快速排序
+void quick_sort(int *arr, const int left, const int right);
+void quick_sort_plus(int *arr, int left, int right);
+int patition(int *arr, int left, int right);
+
+int main() {
+    srand((int)time(0)); 
+    const int L = 12;
+    int *arr = get_array(L);
+    quick_sort_plus(arr, 0, L - 1);
+    display_array(arr, L);
+    free_array(arr);
+    return 0;
+}
+
+
+void quick_sort(int *arr, const int left, const int right) {
+    if(right - left &lt;= small_limit)
+        insert_sort(arr + left, right - left + 1);
+    else {
+        int base = patition(arr, left, right);
+        quick_sort(arr, left, base - 1);
+        quick_sort(arr, base + 1, right);
+    }
+}
+
+void quick_sort_plus(int *arr, int left, int right) {
+    int *_stack = (int *)malloc(sizeof(int) * (right - left + 1));
+    int cnt = -1, base;
+    _stack[++cnt] = left;
+    _stack[++cnt] = right;
+    while(cnt &gt;= 1) {
+        right = _stack[cnt--];
+        left = _stack[cnt--];
+        // 如果区间很短了
+        if(right - left &lt;= small_limit)
+            insert_sort(arr + left, right - left + 1);
+        else {
+            base = patition(arr, left, right);
+            if(base + 1 &lt; right) {
+                _stack[++cnt] = base + 1;
+                _stack[++cnt] = right;
+            }
+            if(left &lt; base - 1) {
+                _stack[++cnt] = left;
+                _stack[++cnt] = base - 1;
+            }
+        }
+    }
+    free(_stack);
+}
+
+
+int patition(int *arr, int left, int right) {
+    // 随机选择一个基准元素
+    int base_pos = _rand(left, right);
+    _swap(arr[left], arr[base_pos]);
+    // 更新，现在 arr[left] 存储的是新选择的值
+    int base_value = arr[left];
+    base_pos = left;
+    while (left &lt; right) {
+        while (arr[right] &gt;= base_value &amp;&amp; left &lt; right)
+            --right;
+        while (arr[left] &lt;= base_value &amp;&amp; left &lt; right) 
+            ++left;
+        if (left &lt; right)
+            _swap(arr[left], arr[right]);
+    }
+    _swap(arr[base_pos], arr[right])
+    return right;
+}
+
+// 友情客串，插入排序
+void insert_sort(int *arr, const int L) {
+    int i, j;
+    for(i = 1;i &lt; L; ++i) {
+        tmp = arr[i];
+        j = i;
+        while(j &gt; 0 &amp;&amp; arr[j - 1] &gt; tmp) {
+            arr[j] = arr[j - 1];
+            --j;
+        }
+        arr[j] = tmp;
+    }
+}
+
+// 输入一个数组, 返回数组首地址
+int *get_array(const int L) {
+    int i = 0;
+    int *arr = (int *)malloc(L * sizeof(int));
+    for (i = 0; i &lt; L; ++i)
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    return arr;
+}
+
+// 释放数组 arr
+void free_array(int *arr) {
+    if (arr != NULL) {
+        free(arr);
+        arr = NULL;
+        printf(&quot;\nallocated memory is free\n&quot;);
+    }
+}
+
+// 打印一个 int 数组，arr 数组指针，L 数组长度
+void display_array(int *arr, const int L) {
+    int i = 0;
+    for (i = 0; i &lt; L; ++i)
+        printf(&quot;%d &quot;, arr[i]);
+    printf(&quot;\n&quot;);
+}
+</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/%E6%8E%92%E5%BA%8F">排序</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/%E5%88%86%E8%80%8C%E6%B2%BB%E4%B9%8B">分而治之</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F">排序</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95">算法</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "排序(8) 快速排序&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

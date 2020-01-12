@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>排序(2) 冒泡排序 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期二, 十一月 26日 2019, 10:15 晚上
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.5k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      10 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>冒泡排序是入门级的排序算法。当初大一学习它，只是简单地记住了它的代码，用时则写，对于为什么它叫做“冒泡排序”、为什么循环控制条件是 N - 1 和 N - i - 1，为什么比较的是 j 和 j + 1 而不是 i 和 i + 1 没有深刻的理解。这并不是学习算法该有的样子，只会模板，不会根据已有思路创造算法。这样的习惯，导致了我算法基础极其不牢固，代码能力弱。</p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>给定一堆数字，排序</p>
+<h2 id="冒泡排序的过程"><a href="#冒泡排序的过程" class="headerlink" title="冒泡排序的过程"></a>冒泡排序的过程</h2><p><img src="/images/algorithms/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F-2-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/bubbleSort.gif" srcset="/img/loading.gif" alt><br>动图可以说是十分形象了。每次从头筛选一个最大值放到剩余数末尾，冒泡排序就是这么简单。中间的交换过程是为了将最大值往后推；并不是每一次都需要交换，当需要交换时，就是“冒泡”的时刻，整个过程看起来就像是冒泡。<br>思路：每次从头筛选一个最大值放到剩余数的末尾。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code class="C">void bubble_sort(int *arr, const int L) {
+    int i, j, tmp;
+    for(i = 0;i &lt; L - 1; ++i) 
+        for(j = 0;j &lt; (L - i) - 1; ++j)
+            if(arr[j] &gt; arr[j + 1])
+                _swap(arr[j], arr[j + 1]);
+}</code></pre>
+<p>每次筛选一次最大值嘛，筛选 L - 1 次就能对 L 个数排好序，所以外层循环代表多少趟。<br>第 i 趟，已经筛选出的最大值有 i 个，剩余 L - i 个数。从 L - i 个数中选出最大值需要 (L - i) - 1 次比较，所以内层循环控制条件是 &lt; (L - i) - 1。<br>每次筛选的过程，都会更新 “当前最大值” ，呈现 “冒泡” 的现象。</p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1. 时间复杂度"></a>1. 时间复杂度</h2><p>假设数据规模 N, 执行判断共：<br> $$(N - 1) + (N - 2) + … + 2 + 1 = \frac{N * (N - 1)}{2} $$次，<br>最好的情况，没有交换发生，$\frac{N * (N - 1)}{2}$<br>最坏的情况，每次都交换，_swap 三次操作，$3 * \frac{N * (N - 1)}{2}$<br>故，时间复杂度$ O(N * N)$</p>
+<h2 id="2-空间复杂度"><a href="#2-空间复杂度" class="headerlink" title="2. 空间复杂度"></a>2. 空间复杂度</h2><p>因为最终结果还是存储在原数组中，这部分不计算；<br>使用 3 个临时变量 i, j, tmp， 空间复杂度 $O(1)$<br>故，空间复杂度 $O(1)$<br>（修改 _swap 函数强制将空间复杂度降为 0 是会出问题的）</p>
+<h1 id="排序稳定性"><a href="#排序稳定性" class="headerlink" title="排序稳定性"></a>排序稳定性</h1><p>由于冒泡排序交换的条件是 arr[j] &gt; arr[j + 1]，所以，相同值的数字之间的前后关系不会改变。因此，冒泡排序是稳定排序。</p>
+<h1 id="存在的问题与改进"><a href="#存在的问题与改进" class="headerlink" title="存在的问题与改进"></a>存在的问题与改进</h1><h2 id="1-添加排序标志位"><a href="#1-添加排序标志位" class="headerlink" title="1. 添加排序标志位"></a>1. 添加排序标志位</h2><p>乍看之下，除了时间复杂度 $O(N * N)$ 有点碍眼之外，代码如此简洁明了，实在找不出啥问题。但还是有大佬将最佳时间复杂度优化成 O(N) 了……</p>
+<pre><code class="c">void bubble_sort(int *arr, const int L) {
+    int i, j, tmp;
+    bool swapped = false;
+    for(i = 0;i &lt; L - 1; ++i) {
+        swapped = false;
+        for(j = 0; j &lt; L - (i + 1); ++j)
+            if(arr[j] &gt; arr[j + 1]) {
+                _swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        if(swapped == false)
+            return;     
+    }
+}</code></pre>
+<p>乍看之下，就增加了一个布尔变量 swapped。如代码所示，第 i 趟筛选最大值时，如果没有发生交换，说明是正序，<br>1 2 3 4 5<br>就是正序，这种情况下剩余的数不需要排序，之前筛选的最大值也排好序。的确可以节约很多计算，当 i &lt;&lt; N，i 十分小时，时间复杂度就是 O(i * N) ≈ O(N)！<br>但是有条件：剩余的数是正序，或者基本排好序了，就能提前结束。<br>有问题吗？<br>从算法正确性上来说，这种改进是没问题的。但是从算法优化上来说，还是存在问题的：<br>(1) 如果数据是逆序的(5 4 3 2 1 这种)或者基本逆序，那么 swapped 就失去了它的作用，因为每次筛选最大值都一定会发生交换，比如<br>5 4 3 2 1<br>第一次：[4 3 2 1] [5]<br>第二次: [3 2 1] [4 5]<br>第三次: [2 1] [3 4 5]<br>…<br>可以看出，每次 swapped 都一定是 true，不会提前返回.<br>(2) 增加了临时变量 swapped 的操作和最坏情况下的计算量。外层循环每次都要对swapped 赋值，N - 1 次；内层循环如果每次都 _swap，那么操作就是 4 次，比原来的 3 次多了一次，最坏情况下的时间复杂度变成了 4 * N * (N - 1) / 2，对于 N 规模到达千万甚至亿级别来说，增加了计算量。<br>(3) 每次外层循环都加入了一次 if 判断，判断这轮是否发生了交换。引入 if 会增加开销吗？<br>会。因为每次找最大值需要计算判断条件 if(swapped == false)，不过在这里增加的开销很小，只是判断 bool 型变量；如果计算判断条件开销很大，那就要考虑了。再者，在这里，即使进入了 if 分支，也只是根据跳转指令返回到 bubble_sort 的调用点而已，不涉及到 if 对多层循环的影响。</p>
+<blockquote>
+<p>扩展：<br>如果代码有多个 if else 判断，最好选择 switch。因为 if else 判断是都要执行的，直到满足条件，中间有一个遍历的操作；而 switch case 类似于一个查表的操作，时间复杂度O(1)，一次到位，是一种空间换时间的做法。<br>if else 在多层循环、流水线操作时，还是会引入很多不确定因素的，深入可以继续查阅相关资料——if 与指令重排、流水线等内容。</p>
+</blockquote>
+<p>当然算法的重点不应当在 if 优化上，而应当在算法整体上的优化，比如降低时间复杂度等方面。再考虑到现代编译器的优化，也许不需要考虑这些， 但是最好知道。<br>…<br>…<br>…<br>虽然存在一些小问题，但是改进的冒泡排序还是有很适用的应用场景的，利用它高效率的特点：数据正序或者基本正序。<br>考虑以下场景：<br>快速排序基本是以递归形式运行的。当程序运行到递归的子问题，处理的数据很少，在这回溯的过程中，数据已经基本有序了，这时候采用冒泡排序就有优势，因为函数递归调用开销较大，直接采用简单的排序反而效果可能会更好。</p>
+<h2 id="2-鸡尾酒排序"><a href="#2-鸡尾酒排序" class="headerlink" title="2. 鸡尾酒排序"></a>2. 鸡尾酒排序</h2><p>这个排序算法是针对冒泡排序做出的小改进，所以并不在八大排序算法之列。本质还是冒泡排序，只是每一轮冒泡，最大值冒一次，最小值也冒一次，双向冒泡，看起来冒泡次数缩短了一半（每次能找出两个元素加入有序集合），每次冒泡的操作加了一倍，看似没有优化。<br>考虑以下数据，采用冒泡排序：<br>2 3 4 5 6 7 1<br>第一次冒泡：2 3 4 5 6 1 [7]<br>第二次冒泡：2 3 4 5 1 [6 7]<br>第三次冒泡：2 3 4 1 [5 6 7]<br>…<br>第六次冒泡：[1 2 3 4 5 6 7]<br>观察以上过程，每次冒泡都只发生了一次交换，都只能将 1 往前推一位，总共经过 6 次冒泡才排好序。<br>鸡尾酒排序对以上数据排序：<br>第一次冒泡：2 3 4 5 6 1 [7] (最大值冒泡 -&gt;)<br>          [1] 2 3 4 5 6 [7] (最小值冒泡 &lt;-)<br>第二次冒泡：没有交换发生<br>排序结束！只经历了两次冒泡。总的交换次数不变，但冒泡次数大大减少</p>
+<pre><code class="c">// 鸡尾酒排序，双向的冒泡排序
+void bubble_sort_bidirectional(int *arr, const int L) {
+    int left = 0, right = L - 1, t, tmp;
+    while(left &lt; right) {
+        for(t = left; t &lt; right; ++t) 
+            if(arr[t] &gt; arr[t + 1])
+                _swap(arr[t], arr[t + 1]);
+        --right;
+        for(t = right; t &gt; left; --t)
+            if(arr[t] &lt; arr[t - 1])
+                _swap(arr[t], arr[t - 1]);
+        ++left;
+    }
+}</code></pre>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p>大一学 C 语言时，特别讨厌这种将函数声明写在前面，函数体写在 main 之后的形式。现在看来，还是有可取之处的，也不是那么难看。<br>但是意义不大，因为实际项目中，函数声明都在头文件 .h 和 .hpp 中，根本不影响，main 还是很简洁的。</p>
+<pre><code class="c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+#define _swap(a, b) { tmp = a; a = b; b = tmp; }
+int *get_array(const int L);
+void free_array(int *arr);
+void display_array(int *arr, const int L);
+void bubble_sort(int *arr, const int L);
+void bubble_sort_plus(int *arr, const int L);
+void bubble_sort_bidirectional(int *arr, const int L);
+
+int main() {
+    freopen(&quot;input.in&quot;, &quot;r&quot;, stdin);
+    const int L = 12;
+    int *arr = get_array(L);
+    bubble_sort_bidirectional(arr, L);
+    display_array(arr, L);
+    free_array(arr);
+    return 0;
+}
+// 冒泡排序
+void bubble_sort(int *arr, const int L) {
+    int i, j, tmp;
+    for(i = 0;i &lt; L - 1; ++i) 
+        for(j = 0; j &lt; (L - i) - 1; ++j)
+            if(arr[j] &gt; arr[j + 1]) 
+                _swap(arr[j], arr[j + 1]);
+}
+
+// 添加了标志位的冒泡排序
+void bubble_sort_plus(int *arr, const int L) {
+    int i, j, tmp;
+    bool swapped = false;
+    for(i = 0;i &lt; L - 1; ++i) {
+        swapped = false;
+        for(j = 0; j &lt; (L - i) - 1; ++j)
+            if(arr[j] &gt; arr[j + 1]) {
+                _swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+        if(swapped == false)
+            return;     
+    }
+}
+
+// 鸡尾酒排序，双向的冒泡排序
+void bubble_sort_bidirectional(int *arr, const int L) {
+    int left = 0, right = L - 1, t, tmp;
+    while(left &lt; right) {
+        for(t = left; t &lt; right; ++t) 
+            if(arr[t] &gt; arr[t + 1])
+                _swap(arr[t], arr[t + 1]);
+        --right;
+        for(t = right; t &gt; left; --t)
+            if(arr[t] &lt; arr[t - 1])
+                _swap(arr[t], arr[t - 1]);
+        ++left;
+    }
+}
+
+// 输入一个数组, 返回数组首地址
+int *get_array(const int L) {
+    int i = 0;
+    int *arr = (int *)malloc(L * sizeof(int));
+    for (i = 0; i &lt; L; ++i)
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    return arr;
+}
+
+// 释放数组 arr
+void free_array(int *arr) {
+    if (arr != NULL) {
+        free(arr);
+        arr = NULL;
+        printf(&quot;\nallocated memory is free&quot;);
+    }
+}
+
+// 打印一个 int 数组，arr 数组指针，L 数组长度
+void display_array(int *arr, const int L) {
+    int i = 0;
+    for (i = 0; i &lt; L; ++i)
+        printf(&quot;%d &quot;, arr[i]);
+    printf(&quot;\n&quot;);
+}</code></pre>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95">算法</a>
+                  &nbsp;
+                
+                  <a class="hover-with-bg" href="/categories/%E6%8E%92%E5%BA%8F">排序</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F">排序</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95">算法</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "排序(2) 冒泡排序&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
