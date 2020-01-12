@@ -262,7 +262,7 @@ void radix_sort(int *const arr, const int left, const int right) {
     // 将数组元素偏移回来
     for (i = 0;i &lt; L; ++i) arr[i] += min_value;
 }</code></pre>
-<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1. 时间复杂度"></a>1. 时间复杂度</h2><p>假设数据规模 N<br>假设数据最大值为  Q，基数为 R，那么总共要收集 $K = \log_{R}{Q}$ 次；<br>每一次收集比较，都要取出每个数的当前位的值O(1)，放到桶中O(1)，共 N 个数，累计 2 * N 次操作，收集遍历的长度恰好是 N，累计 3 * N 次操作。<br>所以，时间复杂度是 $O(N * K)$。<br>其中 $K = \log_{R}{Q}$,是对数得到的，一般都很小，大部分情况都满足 N &gt;&gt; K，即时间复杂度逼近 O(N)。</p>
+<h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><h2 id="1-时间复杂度"><a href="#1-时间复杂度" class="headerlink" title="1. 时间复杂度"></a>1. 时间复杂度</h2><p>假设数据规模 N<br>假设数据最大值为  Q，基数为 R，那么总共要收集 $K = log_{R}{Q}$ 次；<br>每一次收集比较，都要取出每个数的当前位的值O(1)，放到桶中O(1)，共 N 个数，累计 2 * N 次操作，收集遍历的长度恰好是 N，累计 3 * N 次操作。<br>所以，时间复杂度是 $O(N * K)$。<br>其中 $K = log_{R}{Q}$,是对数得到的，一般都很小，大部分情况都满足 N &gt;&gt; K，即时间复杂度逼近 O(N)。</p>
 <blockquote>
 <p>基数为 10 最好理解了。假设最大值 Q = 100000000，基数 R = 10，那么要收集 K = $log_{10}{100000000} = 8$ 次，代表有 8 位</p>
 </blockquote>
@@ -274,7 +274,7 @@ void radix_sort(int *const arr, const int left, const int right) {
 </blockquote>
 <p>从运行效率来看</p>
 <blockquote>
-<p>一般的基数排序都会默认 10，但是根据时间复杂度 $O(N\log_{R}{Q})$ 可以看出，基数排序的效率取决于三个数 N、R、Q，其中N 和 Q 是固定的，R 是自行设计的，所以 R 越小，理论上时间复杂度就相对更低。<br>假设最大值达到了 $10^{8}$ 级别</p>
+<p>一般的基数排序都会默认 10，但是根据时间复杂度 $O(N * log_{R}{Q})$ 可以看出，基数排序的效率取决于三个数 N、R、Q，其中N 和 Q 是固定的，R 是自行设计的，所以 R 越小，理论上时间复杂度就相对更低。<br>假设最大值达到了 $10^{8}$ 级别</p>
 <ul>
 <li>基数 R = 10，共需要收集 8 次</li>
 <li>基数 R = 100，共需要收集 4 次</li>
