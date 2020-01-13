@@ -145,200 +145,6 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/26/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(3)%20%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
-        <p class="h4 index-header">排序(3) 选择排序</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">选择排序的思路可以说是最简单的了，每次找到最小值或者最大值，相对于冒泡排序来说，没有那么多交换的过程。
-问题描述给定一堆数字，排序
-选择排序的过程思路：每次在剩余数中找最值。
-代码void select_sort(int *arr, const int L) {
-    int min_index, i = 0, j = 0, tmp;
-    for(i = 0;i &lt; L - 1; ++i) {
-        min_index = i;
-        for(j = i + 1;j &lt; L; ++j) 
-            if(arr[j] &lt; arr[min_index]) 
-                min_index = j;
-        if(i != min_index) 
-            _swap(arr[i], arr[min_index]);
-    }
-}
-每次找出一个最小值，L 个数据只需要 L - 1 次筛选，故外层循环控制条件是 i &lt; L - 1。找最小值的过程中，使用一个变量 min_index 存</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-26&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          
-            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/26/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(2)%20%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
-        <p class="h4 index-header">排序(2) 冒泡排序</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">冒泡排序是入门级的排序算法。当初大一学习它，只是简单地记住了它的代码，用时则写，对于为什么它叫做“冒泡排序”、为什么循环控制条件是 N - 1 和 N - i - 1，为什么比较的是 j 和 j + 1 而不是 i 和 i + 1 没有深刻的理解。这并不是学习算法该有的样子，只会模板，不会根据已有思路创造算法。这样的习惯，导致了我算法基础极其不牢固，代码能力弱。
-问题描述给定一堆数字，排序
-冒泡排序的过程动图可以说是十分形象了。每次从头筛选一个最大值放到剩余数末尾，冒泡排序就是这么简单。中间的交换过程是为了将最大值往后推；并不是每一次都需要交换，当需要交换时，就是“冒泡”的时刻，整个过程看起来就像是冒泡。思路：每次从头筛选一个最大值放到剩余数的末尾。
-代码void bubble_sort(int *arr, const int L) {
-    int i, j, tmp;
-    for(i = 0;i &lt; L - 1; ++i) 
-        for(j = 0;j &lt; (L - i) - 1; ++j)
-            if(arr[j] &gt; arr</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-26&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          
-            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-            <a href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F">冒泡排序</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/25/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(1)%20%E6%A1%B6%E6%8E%92%E5%BA%8F/">
-        <p class="h4 index-header">排序(1) 桶排序</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">说起排序算法，我最先想到的就是桶排序了，《啊哈算法》上的第一个算法，当初学习时，顿感神奇！这种直接定位到下标的技术(哈希)在日后更是常见，用的好可以降低一个级别的时间复杂度。当时，我已了解到的排序算法如冒泡排序、插入排序、选择排序，快速排序等，都有一个明显比较大小的过程，但是桶排序没有，桶排序直接定位到它应该在哪里，然后…
-
-
-
-
-
-
-就没有然后了，一眼望去，排好了。后续接触，才发现《啊哈算法》上讲的桶排序其实是桶范围 = 1的特殊情况（称“计数排序”），其他情况还是需要比较的过程的，但是我还是把书上讲的当作真的桶排序，谁让我对它那么熟悉呢，哈哈。正文开始。
-问题描述给定一堆数字，排序
-桶排序过程：以下过程并非严格的“桶排序”，只是按照《啊哈算法》上的内容设计第一个数字 2， 放到坐标为 2 的桶上，第二个数 7，放到坐标为 7 的桶上，第三个数 1，放到坐标为 1 的桶上，...若干次 “放” 之后，接下来就是“一眼望去”，扫描一遍，即可得到结果：    0 1 2 2 2 3 4 4 4 5 6 7第一次看到这个排序，我就惊了！ 这么巧妙！原理很简单，就是根据数本身，放到下标为数本</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          
-            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-            <a href="/tags/%E5%93%88%E5%B8%8C">哈希</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/11/25/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(10)%20%E6%80%BB%E7%BB%93/">
-        <p class="h4 index-header">排序(10) 总结</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">代码集合  github
-综述排序问题是个很经典的计算机问题，目标是根据一定的优先级将更重要的数据呈现给人们。例如，在搜索引擎中，给定关键词“希尔排序”，服务器需要汇集并将所有记录按照相关性、时间先后等关键码来排序。用户最希望得到的当然是越相关越好。尽管新的研究方向，例如带有知识的搜索引擎，不再提供多条有序记录供用户挑选而是直接提供最标准的一条答案(夸克浏览器这方面做得还可以)，但排序依旧在很多领域都有广泛的应用。
-回顾(图片来源于网络)以上就是经典的十大排序，说法不一。但可以分为以上两类，其中非比较排序，个人以为可以命名为“借助哈希的排序”，因为它们都利用了类似哈希的方法直接定位或者分级，和其他基于比较的排序不同。当然也存在其他的排序算法，如地精排序、猴子排序等，抑或是基于数据结构性质的排序，后续将另外回顾。以下简单小结以下
-1. 交换排序2. 插入排序3. 选择排序4. 归并排序5. 借助哈希的排序比较
-测评结果机器：Intel(R) Core(TM) i7-7800X CPU @ 3.50GHz 单核数据：测试数据从 1000 ~ 10000000(一亿的数据排序会被操作系统 k</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
-          
-            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
       <a href="/2019/11/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88dp%EF%BC%89-%E6%9C%80%E7%9F%AD%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">
         <p class="h4 index-header">动态规划（dp）-最短编辑距离</p>
         
@@ -435,9 +241,9 @@ C++编译运行安装 C++ 环境，参考安装 C++
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/vscode">vscode</a>&nbsp;
-          
             <a href="/tags/%E6%8F%92%E4%BB%B6">插件</a>&nbsp;
+          
+            <a href="/tags/vscode">vscode</a>&nbsp;
           
         
       </div>
@@ -491,9 +297,9 @@ package-control，推荐使用
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E6%8F%92%E4%BB%B6">插件</a>&nbsp;
-          
             <a href="/tags/sublime">sublime</a>&nbsp;
+          
+            <a href="/tags/%E6%8F%92%E4%BB%B6">插件</a>&nbsp;
           
         
       </div>
@@ -649,8 +455,8 @@ Bandzip
 相关文件每次重装 linux 都有一大堆命令，还是零零散散地，为了克服”怕麻烦“的心理，做一次较为简单、流畅的配置流程，相关文件放在 github下载：
 
 
-sudo pacman -S gitgit clone https://github.com/YHLelaine/files_used_in_manjaro
-直接从 github 下载，没有挂掉</div>
+sudo pacman -S gitgit clone https://github.com/hermosayhl/files_used_in_manjaro
+直接从 github 下载，没有挂</div>
         </div>
       </a>
 
