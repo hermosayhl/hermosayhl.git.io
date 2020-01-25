@@ -145,6 +145,49 @@
     
     
     <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%8E%92%E5%BA%8F/%E6%8E%92%E5%BA%8F(10)%20%E6%80%BB%E7%BB%93/">
+        <p class="h4 index-header">排序(10) 总结</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">代码集合  github
+综述排序问题是个很经典的计算机问题，目标是根据一定的优先级将更重要的数据呈现给人们。例如，在搜索引擎中，给定关键词“希尔排序”，服务器需要汇集并将所有记录按照相关性、时间先后等关键码来排序。用户最希望得到的当然是越相关越好。尽管新的研究方向，例如带有知识的搜索引擎，不再提供多条有序记录供用户挑选而是直接提供最标准的一条答案(夸克浏览器这方面做得还可以)，但排序依旧在很多领域都有广泛的应用。
+回顾(图片来源于网络)以上就是经典的十大排序，说法不一。但可以分为以上两类，其中非比较排序，个人以为可以命名为“借助哈希的排序”，因为它们都利用了类似哈希的方法直接定位或者分级，和其他基于比较的排序不同。当然也存在其他的排序算法，如地精排序、猴子排序等，抑或是基于数据结构性质的排序，后续将另外回顾。以下简单小结以下
+1. 交换排序2. 插入排序3. 选择排序4. 归并排序5. 借助哈希的排序比较
+测评结果机器：Intel(R) Core(TM) i7-7800X CPU @ 3.50GHz 单核数据：测试数据从 1000 ~ 10000000(一亿的数据排序会被操作系统 k</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+            <a href="/categories/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F">排序</a>&nbsp;
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95">算法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
       <a href="/2019/11/25/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88dp%EF%BC%89-%E6%9C%80%E7%9F%AD%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/">
         <p class="h4 index-header">动态规划（dp）-最短编辑距离</p>
         
@@ -417,6 +460,54 @@ sublime-text3 配套的 git 可视化操作软件
 小工具
 Bandzip
 压缩、解压缩，不捆绑软</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E8%BD%AF%E4%BB%B6">软件</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E8%BD%AF%E4%BB%B6">软件</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/11/25/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/windows%20%E4%B8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+        <p class="h4 index-header">windows 下的一些小技巧</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">去除快捷方式小箭头方法一：建立脚本，命名为 run.bat
+reg add &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons&quot; /v 29 /d &quot;%systemroot%\system32\imageres.dll,197&quot; /t reg_sz /f
+taskkill /f /im explorer.exe
+attrib -s -r -h &quot;%userprofile%\AppData\Local\iconcache.db&quot;
+del &quot;%userprofile%\AppData\Local\iconcache.db&quot; /f /q
+start explorer
+pause
+以管理员方式运行
+方法二：万能的 dism++
+
+在此处打开命令行新建注册表文件 run.reg ，内容如下：
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\</div>
         </div>
       </a>
 

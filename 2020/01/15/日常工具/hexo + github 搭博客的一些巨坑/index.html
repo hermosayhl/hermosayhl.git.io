@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="">
+  <meta name="author" content="HermosaYHL">
+  <meta name="keywords" content="">
+  <title>hexo + github 搭建博客的坑 ~ 山与水，你和我</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css"  >
+
+<link rel="stylesheet" href="/css/main.css"  >
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>山与水，你和我</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期三, 一月 15日 2020, 10:51 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    575 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      2 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="bash-hexo-command-not-found"><a href="#bash-hexo-command-not-found" class="headerlink" title="bash: hexo command not found"></a>bash: hexo command not found</h1><ul>
+<li><p>安装 Nodejs，打开 cmd，如下输入：</p>
+<p>  <img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/hexo_github%E7%9A%84%E5%B7%A8%E5%9D%91/image-20200113221502726.png" srcset="/img/loading.gif" alt="image-20200113221502726"></p>
+<p>  说明 nodejs 安装成功</p>
+</li>
+<li><p>安装 hexo</p>
+<p>  打开 git bash（最稳妥）</p>
+<p>  输入命令：</p>
+<pre><code class="shell">  npm install hexo-cli -g</code></pre>
+</li>
+<li><p>检查 + 重启</p>
+<p>  输入命令：</p>
+<pre><code class="shell">  hexo -v</code></pre>
+<p>  如果出现“hexo不是可执行命令”等字眼，则“等几分钟”或者直接重启</p>
+<p>  最终结果如下：</p>
+<p>  <img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/hexo_github%E7%9A%84%E5%B7%A8%E5%9D%91/image-20200113221845045.png" srcset="/img/loading.gif" alt="image-20200113221845045"></p>
+</li>
+</ul>
+<p>好了，到此，hexo 的安装终于结束了</p>
+<h1 id="404-github-page-not-found"><a href="#404-github-page-not-found" class="headerlink" title="404  github page not found"></a>404  github page not found</h1><p>巨坑啊！！！</p>
+<p>出现这个结果的原因十有八九是 <strong>repo 的名字不对</strong>。</p>
+<p>官方描述，必须是 <strong>username.github.io</strong>，也就是说例如我的github用户名是 <strong>hermosayhl</strong>，那么我申请的repo就必须命名为 <strong>hermosayhl.github.io ！！！</strong></p>
+<p>不仅如此，github 的用户名还必须是小写，<strong>不能有大写字母</strong>，巨坑啊，逼得我只能修改我的用户名。</p>
+<p>如果还是 404，那就重新生成：</p>
+<pre><code class="shell">hexo clean
+hexo g
+hexo s</code></pre>
+<h1 id="hexo-引用本地图片无法显示的问题"><a href="#hexo-引用本地图片无法显示的问题" class="headerlink" title="hexo 引用本地图片无法显示的问题"></a>hexo 引用本地图片无法显示的问题</h1><p>巨坑中的巨坑！</p>
+<ul>
+<li><p>官方提供的标签语法根本就不管用</p>
+</li>
+<li><p>插件 <strong>hexo-asset-image</strong></p>
+<p>  此种方法不外乎 <a href="https://blog.csdn.net/Sugar_Rainbow/article/details/57415705，网上大多都是这种方法，但是在我这里并不管用，这就很难受了" target="_blank" rel="noopener">https://blog.csdn.net/Sugar_Rainbow/article/details/57415705，网上大多都是这种方法，但是在我这里并不管用，这就很难受了</a></p>
+</li>
+<li><p>暴力提供路径</p>
+<p>  在 <strong>博客目录/source</strong> 下新建 <strong>images</strong> 文件夹，直接分门别类！大致如下：</p>
+<p>  <img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/hexo_github%E7%9A%84%E5%B7%A8%E5%9D%91/image-20200113223223179.png" srcset="/img/loading.gif" alt="image-20200113223223179"></p>
+<p>  markdown 文件中直接以 <strong>source/</strong> 为根目录，注意，以 source/ 为根目录，<strong>直接加上图片的相对路径</strong>，直接解决问题！</p>
+<p>  例如：</p>
+<p>  <img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/hexo_github%E7%9A%84%E5%B7%A8%E5%9D%91/image-20200113223450973.png" srcset="/img/loading.gif" alt="image-20200113223450973"></p>
+<p>  幸好，hexo 对 md 文件的识别是<strong>递归搜索</strong>目录的，手动分类并没有任何影响。</p>
+</li>
+</ul>
+<h1 id="手动分类太麻烦？"><a href="#手动分类太麻烦？" class="headerlink" title="手动分类太麻烦？"></a>手动分类太麻烦？</h1><p><strong>Typora ！！！</strong></p>
+<p>原因在于，typora 可以设置<strong>根目录</strong>和<strong>图片存储路径</strong></p>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/hexo_github%E7%9A%84%E5%B7%A8%E5%9D%91/image-20200113223858444.png" srcset="/img/loading.gif" alt="image-20200113223858444"></p>
+<p>跳出的窗口，一定要选择 <strong>source</strong></p>
+<p>选择插入图片后的操作：</p>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/hexo_github%E7%9A%84%E5%B7%A8%E5%9D%91/image-20200113224004511.png" srcset="/img/loading.gif" alt="image-20200113224004511"></p>
+<p>跳出的窗口，选择图片存储的目录即可</p>
+<p>最重要的是，<strong>hexo 不需要再修改图片路径！！！</strong>方便啊</p>
+<p>直接</p>
+<pre><code class="shell">hexo g
+hexo s</code></pre>
+<p>嫌麻烦？</p>
+<pre><code class="shell">npm install hexo-broswersync --save</code></pre>
+<p>当保存 md 文件后，浏览器自动刷新，不必再输入命令重新生成。目前我没遇到网上说的一些问题。</p>
+<h1 id="怎么隐藏文章？"><a href="#怎么隐藏文章？" class="headerlink" title="怎么隐藏文章？"></a>怎么隐藏文章？</h1><p>安装插件</p>
+<pre><code class="shell">npm install hexo-hide-posts --save</code></pre>
+<p>在 front 头设置中，输入</p>
+<pre><code class="json">hidden: true</code></pre>
+<p>即可，如下：</p>
+<p><img src="/images/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/hexo_github%E7%9A%84%E5%B7%A8%E5%9D%91/image-20200113225032597.png" srcset="/img/loading.gif" alt="image-20200113225032597"></p>
+<h1 id="为什么安装不了-hexo-admin"><a href="#为什么安装不了-hexo-admin" class="headerlink" title="为什么安装不了 hexo-admin"></a>为什么安装不了 hexo-admin</h1><p>暂未解决</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/%E8%BD%AF%E4%BB%B6">软件</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/hexo">hexo</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%AE%A2">博客</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+      <br><br>
+      
+      
+   <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC80ODIzOS8yNDczNQ==">
+	<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+	</script>
+<noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
+  
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>Fluid</b></a>
+    <br>
+
+    
+  
+    <!-- 不蒜子统计PV -->
+    
+    &nbsp;<span id="busuanzi_container_site_pv">总访问量 
+          <span id="busuanzi_value_site_pv"></span> 次</span>&nbsp;
+  
+  
+    <!-- 不蒜子统计UV -->
+    
+    &nbsp;<span id="busuanzi_container_site_uv">总访客数 
+            <span id="busuanzi_value_site_uv"></span> 人</span>&nbsp;
+  
+  <br>
+
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js" ></script>
+<script src="/lib/popper/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "hexo + github 搭建博客的坑&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>
